@@ -11,20 +11,28 @@ public class ReadWriteData {
         BufferedReader br = new BufferedReader(fr);
         recipes = new ArrayList<>();
         String line;
+        //Continue reading from file until null line reached
         while((line = br.readLine()) != null){
+            //Split ingredient line based on colon delimiter
             String[] ingredients = line.split(":");
+            //Title is the first item
             String title = ingredients[0];
             String ingredientName;
             String qty;
+            //used to separate the ingredientName and Qty separated by a "-"
             String[] ingredientQtyCombo;
-            Recipe temp = new Recipe(title);
+            Recipe tempRecipe = new Recipe(title);
+            //Start at index 1 for each ingredient since title is at index 0
             for(int i = 1; i < ingredients.length; i++){
+                //split ingredient name and quantity separated by dash
                 ingredientQtyCombo = ingredients[i].split("-");
                 ingredientName = ingredientQtyCombo[0];
                 qty = ingredientQtyCombo[1];
-                temp.addIngredient(ingredientName, qty);
+                //populate a temporary recipe object with this ingredient and quantity
+                tempRecipe.addIngredient(ingredientName, qty);
             }
-            recipes.add(temp);
+            //add this temp recipe to the ArrayList which is static and can be accessed by other controllers.
+            recipes.add(tempRecipe);
         }
     }
 
