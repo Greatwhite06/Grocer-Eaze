@@ -38,7 +38,7 @@ public class ReadWriteData {
 
     public static void writeRecipeData(ArrayList<Recipe> recipes) throws IOException {
         File file = new File("recipes.txt");
-        FileWriter fw = new FileWriter(file);
+        FileWriter fw = new FileWriter(file, true);
         for(Recipe recipe: recipes){
             fw.write(recipe.getTitle());
             for(String ingredient: recipe.getIngredients().keySet()){
