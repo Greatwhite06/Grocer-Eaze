@@ -32,7 +32,6 @@ public class MainMenuController implements Initializable {
         window.setScene(scene);
         window.show();
     }
-
     /*
            Start off the application by reading in data from the file to the static Arraylist for retrieval
      */

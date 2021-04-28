@@ -4,10 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,7 +19,21 @@ public class PrintGroceryListController implements Initializable {
     AnchorPane mainPane;
 
     @FXML
-    private Label txtrecipeTitle;
+    private TableView<?> tblRecipes;
+
+    @FXML
+    private Button btnUpdate;
+
+    @FXML
+    private TableView<?> tblPrint;
+
+    @FXML
+    private Button btnHome;
+
+    @FXML
+    void update(ActionEvent event) {
+
+    }
 
     @FXML
     public void goToMainMenu(ActionEvent event) throws IOException {

@@ -18,11 +18,17 @@ import java.util.ResourceBundle;
 
 public class AddRecipeMenuController implements Initializable {
 
+    @FXML
     public TableView<Ingredient> tableview;
+    @FXML
     public TableColumn<Ingredient, String> colIngredient;
+    @FXML
     public TableColumn<Ingredient, String> colAmount;
+    @FXML
     public TextField txtfieldIngredient;
+    @FXML
     public TextField txtfieldQuantity;
+    @FXML
     public TextField txtfieldName;
 
     @FXML
