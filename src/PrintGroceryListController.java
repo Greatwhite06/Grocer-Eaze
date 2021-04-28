@@ -44,6 +44,11 @@ public class PrintGroceryListController implements Initializable {
         window.show();
     }
 
+    @FXML
+    public void update(){
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ArrayList<Recipe> recipes = Model.getRecipes();
@@ -54,4 +59,5 @@ public class PrintGroceryListController implements Initializable {
             System.out.println("\n");
         }
     }
+
 }
