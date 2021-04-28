@@ -39,6 +39,15 @@ public class MainMenuController implements Initializable {
         window.setScene(scene);
         window.show();
     }
+
+    @FXML
+    public void goToOpenCookBookMenu(ActionEvent event) throws IOException {
+        mainPane = FXMLLoader.load(getClass().getResource("OpenCookBookMenu.fxml"));// pane you are GOING TO
+        Scene scene = new Scene(mainPane);// pane you are GOING TO show
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
+        window.setScene(scene);
+        window.show();
+    }
     /*
            Start off the application by reading in data from the file to the static Arraylist for retrieval
      */
