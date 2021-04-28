@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -58,6 +59,11 @@ public class PrintGroceryListController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ArrayList<Recipe> recipes = Model.getRecipes();
         ObservableList<Recipe> list = FXCollections.observableList(recipes);
+        colRecipeTitle.setCellValueFactory(new PropertyValueFactory<Recipe, String>("title"));
+        tblRecipes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        for(Recipe i: list){
+            tblRecipes.getItems().add(i);
+        }
 
         //Test to make sure that the recipes ArrayList was populated correctly
         /*
