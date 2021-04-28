@@ -32,7 +32,7 @@ public class PrintGroceryListController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Recipe> recipes = ReadWriteData.getRecipes();
+        ArrayList<Recipe> recipes = Model.getRecipes();
 
         //Test to make sure that the recipes ArrayList was populated correctly
         for(Recipe recipe: recipes){

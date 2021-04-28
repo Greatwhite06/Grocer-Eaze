@@ -39,7 +39,7 @@ public class MainMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            ReadWriteData.readRecipeData();
+            Model.readRecipeData();
         } catch (IOException e) {
             e.printStackTrace();
         }

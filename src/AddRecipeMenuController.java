@@ -41,6 +41,7 @@ public class AddRecipeMenuController implements Initializable {
         txtfieldIngredient.clear();
         txtfieldQuantity.clear();
     }
+
     /*
      * Delete Ingredient Button
      * Before clicking this button, you must select a row in the ingredient table.
@@ -82,11 +83,10 @@ public class AddRecipeMenuController implements Initializable {
      * Once populated the temp ArrayList is appended to the .txt file using the writeRecipeData function to ensure proper
      * formatting for reading back later.
      */
-
     @FXML
     void addRecipe(ActionEvent event) throws IOException {
 
-        ArrayList<Recipe> tempList = new ArrayList<>();
+        ArrayList<Recipe> tempList = Model.getRecipes();
 
         String title = txtfieldName.getText();
         Recipe tempRecipe = new Recipe(title);
@@ -98,7 +98,7 @@ public class AddRecipeMenuController implements Initializable {
         }
         tempList.add(tempRecipe);
 
-        ReadWriteData.writeRecipeData(tempList);
+        Model.writeRecipeData(tempList);
 
         txtfieldName.clear();
         tableview.getItems().clear();

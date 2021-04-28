@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class ReadWriteData {
+public class Model {
 
     public static ArrayList<Recipe> recipes;
 
@@ -38,15 +38,15 @@ public class ReadWriteData {
 
     public static void writeRecipeData(ArrayList<Recipe> recipes) throws IOException {
         File file = new File("recipes.txt");
-        FileWriter fw = new FileWriter(file, true);
+        FileWriter fw = new FileWriter(file);
         for(Recipe recipe: recipes){
             fw.write(recipe.getTitle());
-            for(String ingredient: recipe.getIngredients().keySet()){
-                fw.write(":" + ingredient);
-                fw.write("-" + recipe.getIngredients().get(ingredient));
+            for(Ingredient ingredient: recipe.getIngredients()){
+                fw.write(":" + ingredient.getIngredientName());
+                fw.write("-" + ingredient.getIngredientAmount());
             }
+            fw.write("\n");
         }
-        fw.write("\n"); //finish with a new line
         fw.close();
     }
 

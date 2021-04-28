@@ -1,1 +1,4 @@
-Grilled Cheese:Cheese-1:Tomato-3:Mayo-1:Bread-2
+Chicken Pot Pie:Carrots-1 cup:Chicken-1 Ib
+Custard:Ice Cream-1 cup:Vanilla-1 Tsp
+Chicken Stew:Chicken-1 Ib
+Chicken Stew:Carrots-1 Cup

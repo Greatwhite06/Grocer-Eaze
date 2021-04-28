@@ -1,9 +1,14 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Recipe {
 
     private String title;
-    private HashMap<String, String> ingredients;
+    /*
+        String key is the ingredient name, second string is the amount
+     */
+    //private HashMap<String, String> ingredients;
+    private ArrayList<Ingredient> ingredientList;
 
     /*
         Constructor for a recipe class
@@ -11,25 +16,30 @@ public class Recipe {
      */
     public Recipe(String title){
         this.title = title;
-        ingredients = new HashMap<>();
+        ingredientList = new ArrayList<>();
+        //ingredients = new HashMap<>();
     }
 
     /*
         Method for adding an entire hashmap of ingredients instead of adding one a time.
         Parameter: Hashmap of ingredients and quantities
      */
+    /*
     public void setIngredientList(HashMap<String, String> ingredients){
         this.ingredients = ingredients;
+    }
+    */
+
+    public void setIngredientList(ArrayList<Ingredient> ingredients){
+        this.ingredientList = ingredients;
     }
 
     /*
         Add an entire list of ingredients
         Parameter: HashMap<String Ingredient_name, String Ingredient_qty>
      */
-    public void addIngredients(HashMap<String, String> ingredientsList){
-        for(String ingredient: ingredientsList.keySet()){
-            this.ingredients.put(ingredient, ingredientsList.get(ingredient));
-        }
+    public void addIngredients(ArrayList<Ingredient> ingredients){
+        this.ingredientList.addAll(ingredients);
     }
 
     /*
@@ -37,7 +47,7 @@ public class Recipe {
         Parameters: String ingredientName, String ingredientQuantity
      */
     public void addIngredient(String ingredientName, String ingredientQuantity){
-        ingredients.put(ingredientName, ingredientQuantity);
+        ingredientList.add(new Ingredient(ingredientName, ingredientQuantity));
     }
 
     /*
@@ -45,11 +55,13 @@ public class Recipe {
         Parameter: String ingredient
     */
     public void removeIngredient(String ingredient){
-        if(ingredients.containsKey(ingredient)) {
-            ingredients.remove(ingredient);
-        }else{
-            System.out.print("Ingredient not found");
+        for(Ingredient i: ingredientList){
+            if (i.getIngredientName().equals(ingredient)) {
+                ingredientList.remove(i);
+                return;
+            }
         }
+        System.out.print("Ingredient not found");
     }
 
     /*
@@ -57,8 +69,8 @@ public class Recipe {
      */
     public void printRecipe(){
         System.out.println("Recipe: " + this.title);
-        for(String ingredientName: ingredients.keySet()){
-           System.out.println("\tIngredient: " + ingredientName + " Quantity: " + ingredients.get(ingredientName));
+        for(Ingredient i: ingredientList){
+           System.out.println("\tIngredient: " + i.getIngredientName() + " Quantity: " + i.getIngredientAmount());
         }
     }
 
@@ -71,7 +83,7 @@ public class Recipe {
     /*
         Retrieve the ingredients of the recipe
     */
-    public HashMap<String, String> getIngredients(){
-        return this.ingredients;
+    public ArrayList<Ingredient> getIngredients(){
+        return this.ingredientList;
     }
 }
