@@ -13,7 +13,7 @@
    <children>
       <AnchorPane prefHeight="508.0" prefWidth="762.0">
          <children>
-            <ImageView fitHeight="508.0" fitWidth="762.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="508.0" fitWidth="762.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@PrintGroceryList/cuttingboard.jpg" />
                </image>
@@ -22,7 +22,7 @@
                <font>
                   <Font size="48.0" />
                </font></Label>
-            <TableView layoutX="25.0" layoutY="254.0" prefHeight="167.0" prefWidth="713.0">
+            <TableView fx:id="tblPrint" layoutX="26.0" layoutY="244.0" onSort="#goToMainMenu" prefHeight="167.0" prefWidth="713.0">
               <columns>
                 <TableColumn prefWidth="479.0" text="Ingredient" />
                 <TableColumn prefWidth="233.0" text="Quantity" />
@@ -42,16 +42,17 @@
                <effect>
                   <Blend />
                </effect></Button>
-            <TableView layoutX="538.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="tblRecipes" editable="true" layoutX="538.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="199.0" text="Recipes" />
+                <TableColumn fx:id="colRecipeTitle" prefWidth="199.0" text="Recipes" />
               </columns>
             </TableView>
-            <Label layoutX="394.0" layoutY="34.0" prefHeight="37.0" prefWidth="143.0" text="Highlight the recipes you want to print out" textFill="WHITE">
+            <Label layoutX="356.0" layoutY="20.0" prefHeight="48.0" prefWidth="175.0" text="(Highlight the recipes you want to print out)" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <Button fx:id="btnUpdate" layoutX="356.0" layoutY="68.0" mnemonicParsing="false" onAction="#update" text="Update" />
          </children>
       </AnchorPane>
    </children>

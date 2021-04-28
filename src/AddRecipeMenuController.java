@@ -41,7 +41,6 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     void buttonAdd(ActionEvent event) {
-
         Ingredient ingredient = new Ingredient(txtfieldIngredient.getText(), txtfieldQuantity.getText());
         tableview.getItems().add(ingredient);
         txtfieldIngredient.clear();

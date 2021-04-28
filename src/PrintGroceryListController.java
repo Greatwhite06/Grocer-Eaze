@@ -1,3 +1,6 @@
+import com.sun.prism.paint.Color;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -5,7 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -19,13 +25,16 @@ public class PrintGroceryListController implements Initializable {
     AnchorPane mainPane;
 
     @FXML
-    private TableView<?> tblRecipes;
+    private TableView<Recipe> tblRecipes;
+
+    @FXML
+    private TableColumn<Recipe, String> colRecipeTitle;
 
     @FXML
     private Button btnUpdate;
 
     @FXML
-    private TableView<?> tblPrint;
+    private TableView<Recipe> tblPrint;
 
     @FXML
     private Button btnHome;
@@ -44,20 +53,19 @@ public class PrintGroceryListController implements Initializable {
         window.show();
     }
 
-    @FXML
-    public void update(){
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ArrayList<Recipe> recipes = Model.getRecipes();
+        ObservableList<Recipe> list = FXCollections.observableList(recipes);
 
         //Test to make sure that the recipes ArrayList was populated correctly
+        /*
         for(Recipe recipe: recipes){
             recipe.printRecipe();
             System.out.println("\n");
         }
+        */
     }
 
 }
