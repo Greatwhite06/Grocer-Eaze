@@ -6,63 +6,56 @@ Cameron Brumblay: BWO509
 */
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
 public class Recipe {
 
-    private String title;
-    /*
-        String key is the ingredient name, second string is the amount
-     */
-    //private HashMap<String, String> ingredients;
-    private ArrayList<Ingredient> ingredientList;
+    private String title; //holds recipe name
+    private ArrayList<Ingredient> ingredientList; //holds each ingredient and quantity for the recipe
 
     /*
-        Constructor for a recipe class
-        Parameter: String title of the recipe
+           Function: Recipe
+           Purpose: Constructor for a recipe class to set the title
+           Parameters: String title
      */
     public Recipe(String title){
         this.title = title;
         ingredientList = new ArrayList<>();
-        //ingredients = new HashMap<>();
     }
 
     /*
-        Method for adding an entire hashmap of ingredients instead of adding one a time.
-        Parameter: Hashmap of ingredients and quantities
+           Function: setIngredientList
+           Purpose: to set the current ingredient list to the new one passed in
+           Parameters: ArrayList<Ingredient> ingredients
      */
-    /*
-    public void setIngredientList(HashMap<String, String> ingredients){
-        this.ingredients = ingredients;
-    }
-    */
-
     public void setIngredientList(ArrayList<Ingredient> ingredients){
         this.ingredientList = ingredients;
     }
 
     /*
-        Add an entire list of ingredients
-        Parameter: HashMap<String Ingredient_name, String Ingredient_qty>
+           Function: addIngredients
+           Purpose: to add an entire list of ingredients to current list
+           Parameters: ArrayList<Ingredient> ingredients
      */
     public void addIngredients(ArrayList<Ingredient> ingredients){
         this.ingredientList.addAll(ingredients);
     }
 
     /*
-        Add one ingredient at a time:
-        Parameters: String ingredientName, String ingredientQuantity
+           Function: addIngredient
+           Purpose: to add one ingredient at a time
+           Parameters: String name, String quantity
      */
     public void addIngredient(String ingredientName, String ingredientQuantity){
         ingredientList.add(new Ingredient(ingredientName, ingredientQuantity));
     }
 
     /*
-        Remove an ingredient from the recipe
-        Parameter: String ingredient
-    */
+           Function: removeIngredients
+           Purpose: to remove an ingredient from the list
+           Parameters: String ingredient
+     */
     public void removeIngredient(String ingredient){
         for(Ingredient i: ingredientList){
             if (i.getIngredientName().equals(ingredient)) {
@@ -74,7 +67,9 @@ public class Recipe {
     }
 
     /*
-        Print Recipe and ingredients
+        Function: Print Recipe
+        Purpose: To print out the recipe and each ingredient
+        Parameters: None
      */
     public void printRecipe(){
         System.out.println("Recipe: " + this.title);
@@ -84,18 +79,27 @@ public class Recipe {
     }
 
     /*
-        Retrieve the title of the recipe
+        Function: getTitle
+        Purpose: Retrieve the title of the recipe
+        Parameters: None
      */
     public String getTitle(){
         return this.title;
     }
     /*
-        Retrieve the ingredients of the recipe
-    */
+        Function: getIngredients
+        Purpose: To retrieve the ingredients of the recipe
+        Parameters: None
+     */
     public ArrayList<Ingredient> getIngredients(){
         return this.ingredientList;
     }
 
+    /*
+        Function: getObservableIngredients
+        Purpose: To retrieve the observable list of ingredients of the recipe (for tableviews)
+        Parameters: None
+     */
     public ObservableList<Ingredient> getObservableIngredients(){
         return FXCollections.observableList(ingredientList);
     }

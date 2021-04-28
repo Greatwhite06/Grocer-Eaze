@@ -26,6 +26,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/*
+    Class purpose: To provide functionality to the print menu to print the list of ingredients for each recipe selected
+ */
 public class PrintGroceryListController implements Initializable {
 
     @FXML
