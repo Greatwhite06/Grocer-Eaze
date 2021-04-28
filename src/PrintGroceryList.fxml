@@ -26,7 +26,7 @@
               <columns>
                 <TableColumn fx:id="colIngredient" prefWidth="282.0" text="Ingredient" />
                 <TableColumn fx:id="colQuantity" prefWidth="294.0" text="Quantity" />
-                  <TableColumn prefWidth="136.0" text="Checked" />
+                  <TableColumn fx:id="colCheck" prefWidth="136.0" text="Checked" />
               </columns>
             </TableView>
             <Button fx:id="btnHome" layoutX="656.0" layoutY="429.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="65.0" prefWidth="71.0">

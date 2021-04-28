@@ -7,6 +7,7 @@ Cameron Brumblay: BWO509
 Wesley Jackson: ydh648
 */
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.CheckBox;
 
 /*
  * Constructor Class
@@ -15,6 +16,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class Ingredient {
     private String name;
     private String amount;
+    private CheckBox check;
 
 
     /* Constructor for defining ingredients
@@ -22,6 +24,7 @@ public class Ingredient {
     public Ingredient(String name, String amount) {
         this.name = name;
         this.amount = amount;
+        check = new CheckBox();
     }
     /* Empty constructor
      */
@@ -45,6 +48,13 @@ public class Ingredient {
         return amount;
     }
 
+    /*
+        Function: getCheckBox
+        Purpose: return ingredient Checkbox
+     */
+    public CheckBox getCheckBox(){
+        return this.check;
+    }
     /*
         Function: getAmount
         Purpose: return the simpleStringProperty name
@@ -77,4 +87,5 @@ public class Ingredient {
     public void setIngredientAmount(String amount) {
         this.amount = amount;
     }
+
 }
