@@ -12,7 +12,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -32,17 +31,27 @@ public class PrintGroceryListController implements Initializable {
     private TableColumn<Recipe, String> colRecipeTitle;
 
     @FXML
+    private TableColumn<Ingredient, String> colIngredient;
+
+    @FXML
+    private TableColumn<Ingredient, String> colQuantity;
+
+    @FXML
     private Button btnUpdate;
 
     @FXML
-    private TableView<Recipe> tblPrint;
+    private TableView<Ingredient> tblPrint;
 
     @FXML
     private Button btnHome;
 
     @FXML
     void update(ActionEvent event) {
-
+        ObservableList<Recipe> list= tblRecipes.getSelectionModel().getSelectedItems();
+        for(Recipe r: list){
+            System.out.println(r.getTitle());
+            tblPrint.getItems().addAll(r.getObservableIngredients());
+        }
     }
 
     @FXML
@@ -57,6 +66,10 @@ public class PrintGroceryListController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Setup the Print table
+        colIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientName"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientAmount"));
+
         ArrayList<Recipe> recipes = Model.getRecipes();
         ObservableList<Recipe> list = FXCollections.observableList(recipes);
         colRecipeTitle.setCellValueFactory(new PropertyValueFactory<Recipe, String>("title"));
@@ -64,14 +77,6 @@ public class PrintGroceryListController implements Initializable {
         for(Recipe i: list){
             tblRecipes.getItems().add(i);
         }
-
-        //Test to make sure that the recipes ArrayList was populated correctly
-        /*
-        for(Recipe recipe: recipes){
-            recipe.printRecipe();
-            System.out.println("\n");
-        }
-        */
     }
 
 }

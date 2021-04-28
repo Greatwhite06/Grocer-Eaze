@@ -47,11 +47,10 @@ public class Ingredient {
     /*
         Function: getSimpleAmount
         Purpose: return the SimpleStringProperty amount
-     */
+    */
     public SimpleStringProperty getSimpleAmount(){
         return new SimpleStringProperty(amount);
     }
-
     /*
         Function: setIngredientName
         Purpose: set the name of this class to the parameter

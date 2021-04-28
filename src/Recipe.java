@@ -1,5 +1,7 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Recipe {
 
@@ -85,5 +87,9 @@ public class Recipe {
     */
     public ArrayList<Ingredient> getIngredients(){
         return this.ingredientList;
+    }
+
+    public ObservableList<Ingredient> getObservableIngredients(){
+        return FXCollections.observableList(ingredientList);
     }
 }

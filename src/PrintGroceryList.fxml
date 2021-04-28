@@ -24,8 +24,8 @@
                </font></Label>
             <TableView fx:id="tblPrint" layoutX="26.0" layoutY="244.0" onSort="#goToMainMenu" prefHeight="167.0" prefWidth="713.0">
               <columns>
-                <TableColumn prefWidth="479.0" text="Ingredient" />
-                <TableColumn prefWidth="233.0" text="Quantity" />
+                <TableColumn fx:id="colIngredient" prefWidth="479.0" text="Ingredient" />
+                <TableColumn fx:id="colQuantity" prefWidth="233.0" text="Quantity" />
               </columns>
             </TableView>
             <Button fx:id="btnHome" layoutX="656.0" layoutY="429.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="65.0" prefWidth="71.0">
