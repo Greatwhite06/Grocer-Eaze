@@ -1,4 +1,12 @@
-import com.sun.prism.paint.Color;
+/*
+CS 3443-003: Heena Rathore
+Joseph Galvan: QRK815
+Trey Jones: LVS888
+Victor Danish: KUG872
+Cameron Brumblay: BWO509
+*/
+
+import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,7 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,14 +44,13 @@ public class PrintGroceryListController implements Initializable {
     private TableColumn<Ingredient, String> colQuantity;
 
     @FXML
-    private Button btnUpdate;
-
-    @FXML
     private TableView<Ingredient> tblPrint;
 
-    @FXML
-    private Button btnHome;
-
+    /*
+        Function: update
+        Purpose: to update the print grocery list table with the items that have been selected by the user
+        Parameters: ActionEven event (unused here)
+     */
     @FXML
     void update(ActionEvent event) {
         ObservableList<Recipe> list= tblRecipes.getSelectionModel().getSelectedItems();
@@ -54,6 +60,11 @@ public class PrintGroceryListController implements Initializable {
         }
     }
 
+    /*
+        Function: goToMainMenu
+        Purpose: To return to main menu screen
+        Parameters: ActionEven event (to get the caller window)
+     */
     @FXML
     public void goToMainMenu(ActionEvent event) throws IOException {
         mainPane = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));// pane you are GOING TO
@@ -64,6 +75,11 @@ public class PrintGroceryListController implements Initializable {
     }
 
 
+    /*
+        Function: initialize
+        Purpose: to initialize cell factories and the items in the upper right corner of menu to print from.
+        Parameters: URL location, ResourceBundle resources (not used here)
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Setup the Print table
