@@ -91,6 +91,7 @@ public class PrintGroceryListController implements Initializable {
         colIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientName"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientAmount"));
         colCheck.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("CheckBox"));
+        colCheck.setStyle("-fx-alignment: CENTER");
 
         ObservableList<Recipe> list = FXCollections.observableList(recipes);
         colRecipeTitle.setCellValueFactory(new PropertyValueFactory<Recipe, String>("title"));
