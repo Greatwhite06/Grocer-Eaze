@@ -4,7 +4,7 @@ Joseph Galvan: QRK815
 Trey Jones: LVS888
 Victor Danish: KUG872
 Cameron Brumblay: BWO509
-Wesley Jackson: ydh648
+Wesley Jackson: YDH648
 */
 
 import javafx.application.Application;
