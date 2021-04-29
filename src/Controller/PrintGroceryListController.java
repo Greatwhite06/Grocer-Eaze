@@ -110,6 +110,12 @@ public class PrintGroceryListController implements Initializable {
         colCheck.setStyle("-fx-alignment: CENTER");
         colUnit.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("measurement"));
 
+
+        colIngredient.impl_setReorderable(false);
+        colCheck.impl_setReorderable(false);
+        colQuantity.impl_setReorderable(false);
+        colUnit.impl_setReorderable(false);
+
         ObservableList<Recipe> list = FXCollections.observableList(recipes);
         colRecipeTitle.setCellValueFactory(new PropertyValueFactory<Recipe, String>("title"));
         tblRecipes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

@@ -103,6 +103,8 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     public void changeIngredient(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
+        if(ingredientStringCellEditEvent.getNewValue().equals(""))
+            return;
         Ingredient ingredient = tableview.getSelectionModel().getSelectedItem();
         ingredient.setIngredientName(ingredientStringCellEditEvent.getNewValue());
         tableview.getItems().remove(ingredient); //remove old
@@ -114,6 +116,8 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     public void changeAmount(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
+        if(ingredientStringCellEditEvent.getNewValue().equals(""))
+            return;
         Ingredient ingredient = tableview.getSelectionModel().getSelectedItem();
         ingredient.setIngredientAmount(ingredientStringCellEditEvent.getNewValue());
         tableview.getItems().remove(ingredient); //remove old
@@ -123,6 +127,8 @@ public class AddRecipeMenuController implements Initializable {
 
     @FXML
     public void changeMeasurement(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
+        if(ingredientStringCellEditEvent.getNewValue().equals(""))
+            return;
         Ingredient ingredient = tableview.getSelectionModel().getSelectedItem();
         if(measurementList.contains(ingredientStringCellEditEvent.getNewValue())){
             ingredient.setIngredientMeasurement(ingredientStringCellEditEvent.getNewValue());
@@ -256,6 +262,10 @@ public class AddRecipeMenuController implements Initializable {
         colIngredient.setCellValueFactory(new PropertyValueFactory<>("IngredientName"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("IngredientAmount"));
         colMeasurement.setCellValueFactory(new PropertyValueFactory<>("Measurement"));
+
+        colIngredient.impl_setReorderable(false);
+        colAmount.impl_setReorderable(false);
+        colMeasurement.impl_setReorderable(false);
 
         ObservableList<Recipe> list = FXCollections.observableList(Model.getRecipes());
         for(Recipe r: list){

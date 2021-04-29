@@ -22,12 +22,15 @@
                         <Font size="48.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tblPrint" layoutX="356.0" layoutY="154.0" onSort="#goToMainMenu" prefHeight="200.0" prefWidth="278.0">
+                  <TableView fx:id="tblPrint" focusTraversable="false" layoutX="356.0" layoutY="154.0" onSort="#goToMainMenu" prefHeight="200.0" prefWidth="278.0">
                      <columns>
-                        <TableColumn fx:id="colIngredient" maxWidth="191.0" prefWidth="158.0" text="Ingredient" />
-                        <TableColumn fx:id="colQuantity" maxWidth="127.0" prefWidth="58.0" text="Qty" />
-                        <TableColumn fx:id="colUnit" prefWidth="61.0" text="Unit" />
+                        <TableColumn fx:id="colIngredient" editable="false" maxWidth="191.0" prefWidth="158.0" resizable="false" sortable="false" text="Ingredient" />
+                        <TableColumn fx:id="colQuantity" editable="false" maxWidth="127.0" prefWidth="58.0" resizable="false" sortable="false" text="Qty" />
+                        <TableColumn fx:id="colUnit" editable="false" prefWidth="61.0" resizable="false" sortable="false" text="Unit" />
                      </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <Button fx:id="btnHome" layoutX="656.0" layoutY="429.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="65.0" prefWidth="71.0">
                      <graphic>
