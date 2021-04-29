@@ -48,6 +48,9 @@ public class PrintGroceryListController implements Initializable {
     private TableColumn<Ingredient, String> colQuantity;
 
     @FXML
+    private TableColumn<Ingredient, String> colUnit;
+
+    @FXML
     private TableView<Ingredient> tblPrint;
 
     /*
@@ -99,6 +102,7 @@ public class PrintGroceryListController implements Initializable {
         colQuantity.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientAmount"));
         colCheck.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("CheckBox"));
         colCheck.setStyle("-fx-alignment: CENTER");
+        colUnit.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("measurement"));
 
         ObservableList<Recipe> list = FXCollections.observableList(recipes);
         colRecipeTitle.setCellValueFactory(new PropertyValueFactory<Recipe, String>("title"));

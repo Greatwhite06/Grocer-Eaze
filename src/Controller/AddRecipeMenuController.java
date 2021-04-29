@@ -46,7 +46,7 @@ public class AddRecipeMenuController implements Initializable {
     public ChoiceBox measurementBox;
 
     ObservableList<String> measurementList = FXCollections.observableArrayList(
-            "measurement", "tsp", "Tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
+            "measurement", "tsp", "tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
 
     @FXML
     AnchorPane mainPane;

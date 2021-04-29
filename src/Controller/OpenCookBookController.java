@@ -45,6 +45,9 @@ public class OpenCookBookController implements Initializable {
     private TableColumn<Ingredient, String> colIngredient;
 
     @FXML
+    private TableColumn<Ingredient, String> colUnit;
+
+    @FXML
     private TableColumn<Ingredient, String> colQuantity;
 
 
@@ -80,6 +83,7 @@ public class OpenCookBookController implements Initializable {
         //Setup the Print table
         colIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientName"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientAmount"));
+        colUnit.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("measurement"));
 
         ArrayList<Recipe> recipes = Model.getRecipes();
         ObservableList<Recipe> list = FXCollections.observableList(recipes);
