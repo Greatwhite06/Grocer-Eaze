@@ -15,9 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -44,6 +42,9 @@ public class PrintGroceryListController implements Initializable {
     private TableColumn<Ingredient, String> colIngredient;
 
     @FXML
+    private TableColumn<Ingredient, String> colCheck;
+
+    @FXML
     private TableColumn<Ingredient, String> colQuantity;
 
     @FXML
@@ -56,9 +57,9 @@ public class PrintGroceryListController implements Initializable {
      */
     @FXML
     void update(ActionEvent event) {
+        tblPrint.getItems().clear();
         ObservableList<Recipe> list= tblRecipes.getSelectionModel().getSelectedItems();
         for(Recipe r: list){
-            System.out.println(r.getTitle());
             tblPrint.getItems().addAll(r.getObservableIngredients());
         }
     }
@@ -86,10 +87,12 @@ public class PrintGroceryListController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Setup the Print table
+        ArrayList<Recipe> recipes = Model.getRecipes();
         colIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientName"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientAmount"));
+        colCheck.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("CheckBox"));
+        colCheck.setStyle("-fx-alignment: CENTER");
 
-        ArrayList<Recipe> recipes = Model.getRecipes();
         ObservableList<Recipe> list = FXCollections.observableList(recipes);
         colRecipeTitle.setCellValueFactory(new PropertyValueFactory<Recipe, String>("title"));
         tblRecipes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
