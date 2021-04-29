@@ -37,7 +37,7 @@ public class Model {
             String title = ingredients[0];
             String ingredientName;
             String qty;
-            String measurement;
+            String measurement = "";
             //used to separate the ingredientName and Qty separated by a "-"
             String[] ingredientQtyCombo;
             Recipe tempRecipe = new Recipe(title);
@@ -47,9 +47,9 @@ public class Model {
                 ingredientQtyCombo = ingredients[i].split("-");
                 ingredientName = ingredientQtyCombo[0];
                 qty = ingredientQtyCombo[1];
-                //ADD//measurement = ingredientQtyCombo[2];
+                //measurement = ingredientQtyCombo[2];
                 //populate a temporary recipe object with this ingredient and quantity
-                tempRecipe.addIngredient(ingredientName, qty);
+                tempRecipe.addIngredient(ingredientName, qty, measurement);
             }
             //add this temp recipe to the ArrayList which is static and can be accessed by other controllers.
             recipes.add(tempRecipe);

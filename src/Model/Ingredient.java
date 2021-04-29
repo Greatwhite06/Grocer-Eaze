@@ -9,8 +9,6 @@ Wesley Jackson: ydh648
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
 
-import java.util.ArrayList;
-
 /*
  * Constructor Class
  * Only used for TableView data when writing a recipe
@@ -23,10 +21,10 @@ public class Ingredient {
 
     /* Constructor for defining ingredients
      */
-    public Ingredient(String name, String amount /*,String measurement*/) {
+    public Ingredient(String name, String amount ,String measurement) {
         this.name = name;
         this.amount = amount;
-        //this.measurement = measurement; //ADD once the box is created in add menu
+        this.measurement = measurement; //ADD once the box is created in add menu
         check = new CheckBox();
     }
     /* Empty constructor
@@ -93,6 +91,10 @@ public class Ingredient {
      */
     public void setIngredientAmount(String amount) {
         this.amount = amount;
+    }
+
+    public void setIngredientMeasurement(String measurement) {
+        this.measurement = this.measurement;
     }
 
 }

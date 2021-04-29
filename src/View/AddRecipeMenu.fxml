@@ -90,14 +90,21 @@
                         <Font name="Cambria" size="16.0" />
                     </font>
                 </TextField>
-                <TableView fx:id="tableview" layoutX="14.0" layoutY="174.0" opacity="0.75" prefHeight="273.0" prefWidth="528.0">
+                <TableView fx:id="tableview" layoutX="11.0" layoutY="174.0" opacity="0.75" prefHeight="273.0" prefWidth="528.0">
                     <columns>
-                        <TableColumn fx:id="colIngredient" onEditCommit="#changeIngredient" prefWidth="269.0" text="Ingredient Name" />
-                        <TableColumn fx:id="colAmount" minWidth="0.0" onEditCommit="#changeAmount" prefWidth="258.0" text="Amount" />
+                        <TableColumn fx:id="colIngredient" onEditCommit="#changeIngredient" prefWidth="350.0" text="Ingredient Name" />
+                        <TableColumn fx:id="colAmount" minWidth="0.0" onEditCommit="#changeAmount" prefWidth="62.0" text="Amount" />
+                        <TableColumn fx:id="colMeasurement" prefWidth="115.0" text="Measurement" />
                     </columns>
                 </TableView>
                 <Button layoutX="18.0" layoutY="137.0" mnemonicParsing="false" onAction="#buttonAdd" text="Add Ingredient" />
                 <Button layoutX="17.0" layoutY="462.0" mnemonicParsing="false" onAction="#buttonDelete" text="Delete Selected" />
+                <Label layoutX="216.0" layoutY="138.0" style="-fx-background-color: white; -fx-opacity: 0.75;" text=" Measurement: " underline="true">
+                    <font>
+                        <Font name="Cambria" size="20.0" />
+                    </font>
+                </Label>
+                <ChoiceBox fx:id="measurementBox" focusTraversable="false" layoutX="351.0" layoutY="137.0" prefHeight="25.0" prefWidth="189.0" />
             </children>
         </AnchorPane>
     </children>

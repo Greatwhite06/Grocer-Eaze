@@ -47,8 +47,8 @@ public class Recipe {
            Purpose: to add one ingredient at a time
            Parameters: String name, String quantity
      */
-    public void addIngredient(String ingredientName, String ingredientQuantity){
-        ingredientList.add(new Ingredient(ingredientName, ingredientQuantity));
+    public void addIngredient(String ingredientName, String ingredientQuantity, String ingredientMeasurement){
+        ingredientList.add(new Ingredient(ingredientName, ingredientQuantity, ingredientMeasurement));
     }
 
     /*
