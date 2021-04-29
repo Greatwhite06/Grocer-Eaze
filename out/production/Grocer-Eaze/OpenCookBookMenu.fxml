@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OpenCookBookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OpenCookBookController">
    <children>
       <AnchorPane prefHeight="484.0" prefWidth="739.0">
          <children>
@@ -53,14 +52,14 @@
                         <TableColumn fx:id="colRecipeTitle" prefWidth="199.0" text="Recipes" />
                      </columns>
                   </TableView>
-                  <Label layoutX="356.0" layoutY="20.0" prefHeight="48.0" prefWidth="175.0" text="(Highlight the recipes you want to print out)" textFill="WHITE" wrapText="true">
+                  <Label layoutX="356.0" layoutY="20.0" prefHeight="48.0" prefWidth="175.0" text="(Highlight the recipes you want to see)" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnUpdate" layoutX="381.0" layoutY="86.0" mnemonicParsing="false" onAction="#update" text="Update" />
-                  <Button fx:id="clearbtn" layoutX="531.0" layoutY="86.0" mnemonicParsing="false" onAction="#clear" text="Clear Fields" />
-                  <Label layoutX="531.0" layoutY="20.0" prefHeight="48.0" prefWidth="175.0" text="(Delete Quantities and Ingredients)" textFill="WHITE" wrapText="true">
+                  <Button fx:id="btnUpdate" layoutX="381.0" layoutY="86.0" mnemonicParsing="false" onAction="#update" text="Show Ingredients" />
+                  <Button fx:id="switchUnits" layoutX="531.0" layoutY="86.0" mnemonicParsing="false" onAction="#clear" text="Unit Conversion" />
+                  <Label layoutX="531.0" layoutY="20.0" prefHeight="48.0" prefWidth="175.0" text="Switches between Metric or Customary units" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
