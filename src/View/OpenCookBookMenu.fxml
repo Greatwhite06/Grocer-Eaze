@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OpenCookBookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OpenCookBookController">
    <children>
       <AnchorPane prefHeight="484.0" prefWidth="739.0">
          <children>
@@ -55,8 +54,8 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnUpdate" layoutX="381.0" layoutY="86.0" mnemonicParsing="false" onAction="#update" text="Show Ingredients" />
-                  <Button fx:id="switchUnits" layoutX="531.0" layoutY="86.0" mnemonicParsing="false" onAction="#clear" text="Unit Conversion" />
+                  <Button fx:id="btnUpdate" layoutX="381.0" layoutY="86.0" mnemonicParsing="false" onAction="#showIngredients" text="Show Ingredients" />
+                  <Button fx:id="switchUnits" layoutX="531.0" layoutY="86.0" mnemonicParsing="false" onAction="#unitConversion" text="Unit Conversion" />
                   <Label layoutX="531.0" layoutY="20.0" prefHeight="48.0" prefWidth="175.0" text="Switches between Metric or Customary units" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />

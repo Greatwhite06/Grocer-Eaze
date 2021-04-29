@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class OpenCookBookController implements Initializable {
@@ -54,6 +55,7 @@ public class OpenCookBookController implements Initializable {
     @FXML
     private TableView<Ingredient> tblPrint;
 
+    boolean unitChange = false;
 
     @FXML
     public void goToMainMenu(ActionEvent event) throws IOException {
@@ -65,17 +67,128 @@ public class OpenCookBookController implements Initializable {
     }
 
     @FXML
-    void update(ActionEvent event) {
-            tblPrint.getItems().clear();
-            ObservableList<Recipe> list = tblRecipes.getSelectionModel().getSelectedItems();
-            for (Recipe r : list) {
-                tblPrint.getItems().addAll(r.getObservableIngredients());
-            }
+    void showIngredients(ActionEvent event) {
+        tblPrint.getItems().clear();
+        ObservableList<Recipe> list = tblRecipes.getSelectionModel().getSelectedItems();
+        for (Recipe r : list) {
+            tblPrint.getItems().addAll(r.getObservableIngredients());
+        }
+
     }
 
     @FXML
     void clear(ActionEvent event) {
         tblPrint.getItems().clear();
+    }
+
+    @FXML
+    void unitConversion(ActionEvent event){
+        if(unitChange){
+            showIngredients(event);
+            unitChange = false;
+        }
+        else {
+            unitChange = true;
+            ObservableList<Ingredient> temp = tblPrint.getItems();
+            //tblPrint.getItems().clear();
+            for (Ingredient item : temp) {
+                double newAmount;
+                switch (item.getMeasurement()) {
+                    case "tsp":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 5.0;
+                        if (newAmount > 1000.0) {
+                            item.setIngredientAmount(Double.toString(newAmount / 1000.0));
+                            item.setIngredientMeasurement("ltr");
+                            break;
+                        }
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("ml");
+                        break;
+                    case "tbsp":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 15.0;
+                        if (newAmount > 1000.0) {
+                            item.setIngredientAmount(Double.toString(newAmount / 1000.0));
+                            item.setIngredientMeasurement("ltr");
+                            break;
+                        }
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("ml");
+                        break;
+                    case "cup":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 237.0;
+                        if (newAmount > 1000.0) {
+                            item.setIngredientAmount(Double.toString(newAmount / 1000.0));
+                            item.setIngredientMeasurement("ltr");
+                            break;
+                        }
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("ml");
+                        break;
+                    case "oz":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 28.0;
+                        if (newAmount > 1000.0) {
+                            item.setIngredientAmount(Double.toString(newAmount / 1000));
+                            item.setIngredientMeasurement("kg");
+                            break;
+                        }
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("g");
+                        break;
+                    case "floz":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 30.0;
+                        if (newAmount > 1000.0) {
+                            item.setIngredientAmount(Double.toString(newAmount / 1000.0));
+                            item.setIngredientMeasurement("ltr");
+                            break;
+                        }
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("ml");
+                        break;
+                    case "pt":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 473.0;
+                        if (newAmount > 1000.0) {
+                            item.setIngredientAmount(Double.toString(newAmount / 1000.0));
+                            item.setIngredientMeasurement("ltr");
+                            break;
+                        }
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("ml");
+                        break;
+                    case "qt":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 950.0;
+                        if (newAmount > 1000.0) {
+                            item.setIngredientAmount(Double.toString(newAmount / 1000.0));
+                            item.setIngredientMeasurement("ltr");
+                            break;
+                        }
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("ml");
+                        break;
+                    case "gal":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 3.8;
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("ltr");
+                        break;
+                    case "lb":
+                        newAmount = Double.parseDouble(item.getIngredientAmount()) * 454.0;
+                        if (newAmount > 1000.0) {
+                            item.setIngredientAmount(Double.toString(newAmount / 1000.0));
+                            item.setIngredientMeasurement("kg");
+                            break;
+                        }
+                        item.setIngredientAmount(Double.toString(newAmount));
+                        item.setIngredientMeasurement("g");
+                        break;
+                }
+
+            }
+            for(Ingredient ing : temp){
+                System.out.println("Name: " + ing.getIngredientName() + " Amount: " + ing.getIngredientAmount() + " Unit: " + ing.getMeasurement());
+            }
+
+        }
+
+
     }
 
     @Override
