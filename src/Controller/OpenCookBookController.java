@@ -1,6 +1,8 @@
+package Controller;
+
+import Model.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,12 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-
-
-
-
-
 
 public class OpenCookBookController implements Initializable {
     @FXML
@@ -57,7 +53,7 @@ public class OpenCookBookController implements Initializable {
 
     @FXML
     public void goToMainMenu(ActionEvent event) throws IOException {
-        mainPane = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));// pane you are GOING TO
+        mainPane = FXMLLoader.load(getClass().getResource("View/View.MainMenu.fxml"));// pane you are GOING TO
         Scene scene = new Scene(mainPane);// pane you are GOING TO show
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
         window.setScene(scene);
@@ -66,16 +62,17 @@ public class OpenCookBookController implements Initializable {
 
     @FXML
     void update(ActionEvent event) {
+            tblPrint.getItems().clear();
             ObservableList<Recipe> list = tblRecipes.getSelectionModel().getSelectedItems();
-            for (Recipe r : list){ 
+            for (Recipe r : list) {
                 tblPrint.getItems().addAll(r.getObservableIngredients());
             }
     }
+
     @FXML
     void clear(ActionEvent event) {
         tblPrint.getItems().clear();
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

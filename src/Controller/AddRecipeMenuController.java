@@ -1,3 +1,4 @@
+package Controller;
 /*
 CS 3443-003: Heena Rathore
 Joseph Galvan: QRK815
@@ -22,6 +23,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import Model.*;
 
 public class AddRecipeMenuController implements Initializable {
 
@@ -42,7 +44,7 @@ public class AddRecipeMenuController implements Initializable {
     AnchorPane mainPane;
 
     /*
-     * Add Ingredient Button
+     * Add Model.Ingredient Button
      * When this button is clicked, it will take the string data entered in the ingredient field and amount field
      * and populate it in the table, showing the current ingredients you have.
      */
@@ -55,7 +57,7 @@ public class AddRecipeMenuController implements Initializable {
     }
 
     /*
-     * Delete Ingredient Button
+     * Delete Model.Ingredient Button
      * Before clicking this button, you must select a row in the ingredient table.
      * Once row is selected, clicking the button will remove the ingredient data from that row.
      * Makes for easier recipe editing.
@@ -87,7 +89,7 @@ public class AddRecipeMenuController implements Initializable {
     }
 
     /*
-     * Add Recipe Button
+     * Add Model.Recipe Button
      * This will create and write a recipe to the .txt file
      * The recipe will be appended to the end of the .txt file
      * A temporary ArrayList of Recipes is created so only 1 recipe is added vs accessing the static recipes ArrayList
@@ -118,7 +120,7 @@ public class AddRecipeMenuController implements Initializable {
 
     @FXML
     public void goToHomeMenu(ActionEvent event) throws IOException {
-        mainPane = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));// pane you are GOING TO
+        mainPane = FXMLLoader.load(getClass().getResource("View/View.MainMenu.fxml"));// pane you are GOING TO
         Scene scene = new Scene(mainPane);// pane you are GOING TO show
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
         window.setScene(scene);
@@ -148,7 +150,7 @@ public class AddRecipeMenuController implements Initializable {
         colAmount.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
-    /*ObservableList<Ingredient> observableList = FXCollections.observableArrayList(
-            new Ingredient("Chocolate", "2 Bars")
+    /*ObservableList<Model.Ingredient> observableList = FXCollections.observableArrayList(
+            new Model.Ingredient("Chocolate", "2 Bars")
     );*/
 }

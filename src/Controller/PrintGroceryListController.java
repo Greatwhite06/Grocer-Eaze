@@ -1,4 +1,4 @@
-/*
+package Controller;/*
 CS 3443-003: Heena Rathore
 Joseph Galvan: QRK815
 Trey Jones: LVS888
@@ -8,7 +8,6 @@ Cameron Brumblay: BWO509
 
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,10 +19,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import Model.*;
 
 /*
     Class purpose: To provide functionality to the print menu to print the list of ingredients for each recipe selected
@@ -79,7 +78,7 @@ public class PrintGroceryListController implements Initializable {
      */
     @FXML
     public void goToMainMenu(ActionEvent event) throws IOException {
-        mainPane = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));// pane you are GOING TO
+        mainPane = FXMLLoader.load(getClass().getResource("View/View.MainMenu.fxml"));// pane you are GOING TO
         Scene scene = new Scene(mainPane);// pane you are GOING TO show
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
         window.setScene(scene);
@@ -111,12 +110,12 @@ public class PrintGroceryListController implements Initializable {
 
     private ObservableList<Ingredient> combineItems(ArrayList<Ingredient> origin){
         /*
-        ArrayList<Ingredient> combined = new ArrayList<>();
+        ArrayList<Model.Ingredient> combined = new ArrayList<>();
         int o;
         for(o = 0; o < origin.size(); o++){
-            Ingredient tempOrigin = origin.get(o);
-            for(Ingredient i: combined){
-                Ingredient tempCombined = i;
+            Model.Ingredient tempOrigin = origin.get(o);
+            for(Model.Ingredient i: combined){
+                Model.Ingredient tempCombined = i;
                 if(tempOrigin.getIngredientName().equals(tempCombined.getIngredientName()) && tempOrigin.getMeasurement().equals(tempCombined.getMeasurement())){
                     int originAmount = Integer.parseInt(tempOrigin.getIngredientAmount());
                     int combinedAmount = Integer.parseInt(tempCombined.getIngredientAmount());

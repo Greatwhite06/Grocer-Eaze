@@ -18,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        AnchorPane root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+        AnchorPane root = FXMLLoader.load(getClass().getResource("View/MainMenu.fxml"));
         Scene scene = new Scene(root, 750, 500);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Grocer-Eaze: Main");

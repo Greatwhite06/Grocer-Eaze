@@ -1,4 +1,4 @@
-/*CS 3443-003: Heena Rathore
+package Model;/*CS 3443-003: Heena Rathore
 Joseph Galvan: QRK815
 Trey Jones: LVS888
 Victor Danish: KUG872
@@ -15,7 +15,7 @@ public class Recipe {
     private ArrayList<Ingredient> ingredientList; //holds each ingredient and quantity for the recipe
 
     /*
-           Function: Recipe
+           Function: Model.Recipe
            Purpose: Constructor for a recipe class to set the title
            Parameters: String title
      */
@@ -27,7 +27,7 @@ public class Recipe {
     /*
            Function: setIngredientList
            Purpose: to set the current ingredient list to the new one passed in
-           Parameters: ArrayList<Ingredient> ingredients
+           Parameters: ArrayList<Model.Ingredient> ingredients
      */
     public void setIngredientList(ArrayList<Ingredient> ingredients){
         this.ingredientList = ingredients;
@@ -36,7 +36,7 @@ public class Recipe {
     /*
            Function: addIngredients
            Purpose: to add an entire list of ingredients to current list
-           Parameters: ArrayList<Ingredient> ingredients
+           Parameters: ArrayList<Model.Ingredient> ingredients
      */
     public void addIngredients(ArrayList<Ingredient> ingredients){
         this.ingredientList.addAll(ingredients);
@@ -63,18 +63,18 @@ public class Recipe {
                 return;
             }
         }
-        System.out.print("Ingredient not found");
+        System.out.print("Model.Ingredient not found");
     }
 
     /*
-        Function: Print Recipe
+        Function: Print Model.Recipe
         Purpose: To print out the recipe and each ingredient
         Parameters: None
      */
     public void printRecipe(){
-        System.out.println("Recipe: " + this.title);
+        System.out.println("Model.Recipe: " + this.title);
         for(Ingredient i: ingredientList){
-           System.out.println("\tIngredient: " + i.getIngredientName() + " Quantity: " + i.getIngredientAmount());
+           System.out.println("\tModel.Ingredient: " + i.getIngredientName() + " Quantity: " + i.getIngredientAmount());
         }
     }
 

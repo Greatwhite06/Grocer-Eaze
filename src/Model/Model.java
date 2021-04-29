@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -59,7 +61,7 @@ public class Model {
     /*
         Function: writeRecipeData
         Purpose: to write the recipes to the file
-        Parameters: ArrayList<Recipe> recipes
+        Parameters: ArrayList<Model.Recipe> recipes
      */
     public static void writeRecipeData(ArrayList<Recipe> recipes) throws IOException {
         File file = new File("recipes.txt");

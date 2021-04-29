@@ -1,4 +1,4 @@
-/*
+package Controller;/*
 CS 3443-003: Heena Rathore
 Joseph Galvan: QRK815
 Trey Jones: LVS888
@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import Model.*;
 
 public class MainMenuController implements Initializable {
     @FXML
@@ -24,7 +25,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void goToPrintGroceryListMenu(ActionEvent event) throws IOException{
-        mainPane = FXMLLoader.load(getClass().getResource("PrintGroceryList.fxml"));// pane you are GOING TO
+        mainPane = FXMLLoader.load(getClass().getResource("../View/PrintGroceryList.fxml"));// pane you are GOING TO
         Scene scene = new Scene(mainPane);// pane you are GOING TO show
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
         window.setScene(scene);
@@ -33,7 +34,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void goToAddRecipeMenu(ActionEvent event) throws IOException{
-        mainPane = FXMLLoader.load(getClass().getResource("AddRecipeMenu.fxml"));// pane you are GOING TO
+        mainPane = FXMLLoader.load(getClass().getResource("../View/AddRecipeMenu.fxml"));// pane you are GOING TO
         Scene scene = new Scene(mainPane);// pane you are GOING TO show
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
         window.setScene(scene);
@@ -42,7 +43,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void goToOpenCookBookMenu(ActionEvent event) throws IOException {
-        mainPane = FXMLLoader.load(getClass().getResource("OpenCookBookMenu.fxml"));// pane you are GOING TO
+        mainPane = FXMLLoader.load(getClass().getResource("../View/OpenCookBookMenu.fxml"));// pane you are GOING TO
         Scene scene = new Scene(mainPane);// pane you are GOING TO show
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
         window.setScene(scene);
