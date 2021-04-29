@@ -129,7 +129,7 @@ public class AddRecipeMenuController implements Initializable {
 
     @FXML
     public void goToHomeMenu(ActionEvent event) throws IOException {
-        mainPane = FXMLLoader.load(getClass().getResource("View/View.MainMenu.fxml"));// pane you are GOING TO
+        mainPane = FXMLLoader.load(getClass().getResource("../View/MainMenu.fxml"));// pane you are GOING TO
         Scene scene = new Scene(mainPane);// pane you are GOING TO show
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
         window.setScene(scene);
