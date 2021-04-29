@@ -1,5 +1,7 @@
 package Model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -76,5 +78,14 @@ public class Model {
      */
     public static ArrayList<Recipe> getRecipes(){
         return recipes;
+    }
+
+    /*
+    Function: getRecipes
+    Purpose: to get an observable list of the Recipes
+    Parameters: None
+ */
+    public static ObservableList<Recipe> getObservableRecipes(){
+        return FXCollections.observableList(recipes);
     }
 }
