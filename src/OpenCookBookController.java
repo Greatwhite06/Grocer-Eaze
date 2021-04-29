@@ -22,6 +22,10 @@ import java.util.ResourceBundle;
 
 
 
+
+
+
+
 public class OpenCookBookController implements Initializable {
     @FXML
     private Button clearbtn;
@@ -63,7 +67,7 @@ public class OpenCookBookController implements Initializable {
     @FXML
     void update(ActionEvent event) {
             ObservableList<Recipe> list = tblRecipes.getSelectionModel().getSelectedItems();
-            for (Recipe r : list) 
+            for (Recipe r : list){ 
                 tblPrint.getItems().addAll(r.getObservableIngredients());
             }
     }
@@ -86,5 +90,7 @@ public class OpenCookBookController implements Initializable {
         for (Recipe i : list) {
             tblRecipes.getItems().add(i);
         }
+        
     }
+
 }
