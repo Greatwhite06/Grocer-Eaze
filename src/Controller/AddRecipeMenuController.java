@@ -46,7 +46,7 @@ public class AddRecipeMenuController implements Initializable {
     public ChoiceBox measurementBox;
 
     ObservableList<String> measurementList = FXCollections.observableArrayList(
-            "tsp", "Tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
+            "measurement", "tsp", "tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
 
     @FXML
     AnchorPane mainPane;
@@ -58,6 +58,11 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     void buttonAdd(ActionEvent event) {
+        if(measurementBox.getValue().toString() == "measurement") {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.showAndWait();
+            return;
+        }
         Ingredient ingredient = new Ingredient(txtfieldIngredient.getText(), txtfieldQuantity.getText(), measurementBox.getValue().toString());
         tableview.getItems().add(ingredient);
         txtfieldIngredient.clear();
@@ -152,9 +157,9 @@ public class AddRecipeMenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         colIngredient.setCellValueFactory(new PropertyValueFactory<>("IngredientName"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("IngredientAmount"));
-        colMeasurement.setCellValueFactory(new PropertyValueFactory<>("IngredientUnit"));
+        colMeasurement.setCellValueFactory(new PropertyValueFactory<>("Measurement"));
         //tableview.setItems(observableList);
-        measurementBox.setValue("tsp");
+        measurementBox.setValue("measurement");
         measurementBox.setItems(measurementList);
 
         tableview.setEditable(true);

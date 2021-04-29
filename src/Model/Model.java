@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Model {
 
     public static ArrayList<Recipe> recipes;
-    public static ArrayList<String> measurements;
 
     /*
         Function: readRecipeData
@@ -18,15 +17,6 @@ public class Model {
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         recipes = new ArrayList<>();
-        measurements = new ArrayList<>();
-        measurements.add("tsp");
-        measurements.add("tbsp");
-        measurements.add("cup");
-        measurements.add("oz");
-        measurements.add("pt");
-        measurements.add("qt");
-        measurements.add("gal");
-        measurements.add("lb");
         String line;
 
         //Continue reading from file until null line reached
@@ -37,7 +27,7 @@ public class Model {
             String title = ingredients[0];
             String ingredientName;
             String qty;
-            String measurement = "";
+            String measurement;
             //used to separate the ingredientName and Qty separated by a "-"
             String[] ingredientQtyCombo;
             Recipe tempRecipe = new Recipe(title);
@@ -47,7 +37,8 @@ public class Model {
                 ingredientQtyCombo = ingredients[i].split("-");
                 ingredientName = ingredientQtyCombo[0];
                 qty = ingredientQtyCombo[1];
-                //measurement = ingredientQtyCombo[2];
+                measurement = ingredientQtyCombo[2];
+
                 //populate a temporary recipe object with this ingredient and quantity
                 tempRecipe.addIngredient(ingredientName, qty, measurement);
             }
@@ -71,7 +62,7 @@ public class Model {
             for(Ingredient ingredient: recipe.getIngredients()){
                 fw.write(":" + ingredient.getIngredientName());
                 fw.write("-" + ingredient.getIngredientAmount());
-                //ADD//fw.write("-" + ingredient.getMeasurement());
+                fw.write("-" + ingredient.getMeasurement());
             }
             fw.write("\n");
         }
@@ -86,12 +77,4 @@ public class Model {
     public static ArrayList<Recipe> getRecipes(){
         return recipes;
     }
-
-
-    /*
-        Function: getMeasurements
-        Purpose: to get the acceptable measurements allowed
-        Parameters: None
-     */
-    public static ArrayList<String> getMeasurements(){ return measurements; }
 }

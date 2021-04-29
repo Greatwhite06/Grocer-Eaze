@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OpenCookBookController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OpenCookBookController">
    <children>
       <AnchorPane prefHeight="484.0" prefWidth="739.0">
          <children>
@@ -24,8 +25,9 @@
                   </Label>
                   <TableView fx:id="tblPrint" layoutX="356.0" layoutY="154.0" onSort="#goToMainMenu" prefHeight="200.0" prefWidth="278.0">
                      <columns>
-                        <TableColumn fx:id="colQuantity" maxWidth="127.0" prefWidth="112.0" text="Quantity" />
-                        <TableColumn fx:id="colIngredient" maxWidth="164.0" prefWidth="158.0" text="Ingredient" />
+                        <TableColumn fx:id="colIngredient" maxWidth="191.0" prefWidth="158.0" text="Ingredient" />
+                        <TableColumn fx:id="colQuantity" maxWidth="127.0" prefWidth="58.0" text="Qty" />
+                        <TableColumn fx:id="colUnit" prefWidth="61.0" text="Unit" />
                      </columns>
                   </TableView>
                   <Button fx:id="btnHome" layoutX="656.0" layoutY="429.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="65.0" prefWidth="71.0">

@@ -21,7 +21,7 @@ public class Ingredient {
 
     /* Constructor for defining ingredients
      */
-    public Ingredient(String name, String amount ,String measurement) {
+    public Ingredient(String name, String amount, String measurement) {
         this.name = name;
         this.amount = amount;
         this.measurement = measurement; //ADD once the box is created in add menu
