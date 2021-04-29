@@ -64,6 +64,24 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     void buttonAdd(ActionEvent event) {
+        if(txtfieldName.getText().isEmpty()){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please Enter a recipe title");
+            a.showAndWait();
+            return;
+        }
+        if(txtfieldIngredient.getText().isEmpty()){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please enter an ingredient");
+            a.showAndWait();
+            return;
+        }
+        if(txtfieldQuantity.getText().isEmpty()) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please enter a quantity");
+            a.showAndWait();
+            return;
+        }
         if(measurementBox.getValue().toString().equals("")) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Please select a unit of measurement");
@@ -76,7 +94,6 @@ public class AddRecipeMenuController implements Initializable {
         txtfieldQuantity.clear();
     }
 
-
     /*
          * Function: deleteRecipe
          * Purpose: When this button is clicked, it will take the string data entered in the ingredient field and amount field
@@ -85,11 +102,20 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     void deleteRecipe(ActionEvent event) throws IOException {
-        Recipe r = tblRecipe.getSelectionModel().getSelectedItem();
-        ArrayList<Recipe> recipes = Model.getRecipes();
-        recipes.remove(r);
-        Model.writeRecipeData(recipes); //update list in file
-        updateRecipeTable();
+
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+        a.setTitle("Delete Recipe");
+        a.setContentText("Are you sure you want to delete?");
+        Optional<ButtonType> result = a.showAndWait();
+        ButtonType button = result.orElse(ButtonType.CANCEL);
+
+        if (button == ButtonType.OK) {
+            Recipe r = tblRecipe.getSelectionModel().getSelectedItem();
+            ArrayList<Recipe> recipes = Model.getRecipes();
+            recipes.remove(r);
+            Model.writeRecipeData(recipes); //update list in file
+            updateRecipeTable();
+        }
     }
 
     /*
@@ -136,7 +162,6 @@ public class AddRecipeMenuController implements Initializable {
         tableview.getItems().add(ingredient); //set new
     }
 
-
     /*
        Function: changeMeasurement
        Purpose: Allows modification of ingredient from within table
@@ -182,6 +207,7 @@ public class AddRecipeMenuController implements Initializable {
         //looping through recipes to check for existence
         for(int i = 0; i < tempList.size(); i++ ) {
             if(tempList.get(i).getTitle().equals(title)) {
+
                 Alert a = new Alert(Alert.AlertType.CONFIRMATION);
                 a.setTitle("Add/Update Recipe Confirmation");
                 a.setHeaderText("Recipe exists, would you like to update existing recipe?");
@@ -241,7 +267,6 @@ public class AddRecipeMenuController implements Initializable {
         }
     }
 
-
     /*
         Function: initialize
         Purpose: to initialize cell factories and the items in the upper right corner of menu to print from.
@@ -263,7 +288,6 @@ public class AddRecipeMenuController implements Initializable {
             tblRecipe.getItems().add(r);
         }
 
-        //tableview.setItems(observableList);
         measurementBox.setValue("");
         measurementBox.setItems(measurementList);
 
@@ -272,7 +296,6 @@ public class AddRecipeMenuController implements Initializable {
         colAmount.setCellFactory(TextFieldTableCell.forTableColumn());
         colMeasurement.setCellFactory(TextFieldTableCell.forTableColumn());
     }
-
 
     /*
         Function: updateRecipeTable
