@@ -49,6 +49,7 @@ public class AddRecipeMenuController implements Initializable {
 
     public TableColumn<Recipe, String> colRecipe;
 
+    //used for defined measurements for the menu
     ObservableList<String> measurementList = FXCollections.observableArrayList(
             "tsp", "tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
 
@@ -56,9 +57,10 @@ public class AddRecipeMenuController implements Initializable {
     AnchorPane mainPane;
 
     /*
-     * Add Model.Ingredient Button
-     * When this button is clicked, it will take the string data entered in the ingredient field and amount field
-     * and populate it in the table, showing the current ingredients you have.
+         * Function: buttonAdd
+         * Purpose: When this button is clicked, it will take the string data entered in the ingredient field and amount field
+           and populate it in the table, showing the current ingredients you have.
+         * Parameters: ActionEvent event
      */
     @FXML
     void buttonAdd(ActionEvent event) {
@@ -75,6 +77,12 @@ public class AddRecipeMenuController implements Initializable {
     }
 
 
+    /*
+         * Function: deleteRecipe
+         * Purpose: When this button is clicked, it will take the string data entered in the ingredient field and amount field
+           and populate it in the table, showing the current ingredients you have.
+         * Parameters: ActionEvent event
+     */
     @FXML
     void deleteRecipe(ActionEvent event) throws IOException {
         Recipe r = tblRecipe.getSelectionModel().getSelectedItem();
@@ -85,10 +93,10 @@ public class AddRecipeMenuController implements Initializable {
     }
 
     /*
-     * Delete Model.Ingredient Button
-     * Before clicking this button, you must select a row in the ingredient table.
-     * Once row is selected, clicking the button will remove the ingredient data from that row.
-     * Makes for easier recipe editing.
+         * Function: buttonDelete
+         * Purpose: Once row is selected, clicking the button will remove the ingredient data from that row.
+           Makes for easier recipe editing.
+         * Parameters: ActionEvent actionEvent
      */
     @FXML
     public void buttonDelete(ActionEvent actionEvent) {
@@ -99,7 +107,9 @@ public class AddRecipeMenuController implements Initializable {
     }
 
     /*
-     * Allows users to directly select an ingredient cell from the table and edit it
+       Function: changeIngredient
+       Purpose: Allows modification of ingredient from within table
+       Parameters TableColumn.CellEditevent (allows passing of cell object to modify text)
      */
     @FXML
     public void changeIngredient(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
@@ -112,7 +122,9 @@ public class AddRecipeMenuController implements Initializable {
     }
 
     /*
-     * Allows users to directly select an amount cell from the table and edit it
+       Function: changeAmount
+       Purpose: Allows modification of ingredient from within table
+       Parameters TableColumn.CellEditevent (allows passing of cell object to modify text)
      */
     @FXML
     public void changeAmount(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
@@ -125,6 +137,11 @@ public class AddRecipeMenuController implements Initializable {
     }
 
 
+    /*
+       Function: changeMeasurement
+       Purpose: Allows modification of ingredient from within table
+       Parameters TableColumn.CellEditevent (allows passing of cell object to modify text)
+     */
     @FXML
     public void changeMeasurement(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
         if(ingredientStringCellEditEvent.getNewValue().equals(""))
@@ -142,13 +159,9 @@ public class AddRecipeMenuController implements Initializable {
     }
 
     /*
-     * Add Model.Recipe Button
-     * This will create and write a recipe to the .txt file
-     * A temporary ArrayList of Recipes is created so only 1 recipe is added vs accessing the static recipes ArrayList
-     * A for loop runs through the size of the table and adds the ingredients to the tempRecipe
-     * Once populated the temp ArrayList written to the .txt file using the writeRecipeData function to ensure proper
-     * formatting for reading back later.
-     */
+        Function: addRecipe
+        Purpose: adds recipe from the input to the table and writes it to the model class too.
+    */
     @FXML
     void addRecipe(ActionEvent event) throws IOException {
 
@@ -197,6 +210,11 @@ public class AddRecipeMenuController implements Initializable {
         updateRecipeTable();
     }
 
+    /*
+        Function:  goToHomeMenu
+        Purpose: to return to homescreen
+        Parameters: ActionEvent event
+     */
     @FXML
     public void goToHomeMenu(ActionEvent event) throws IOException {
         mainPane = FXMLLoader.load(getClass().getResource("../View/MainMenu.fxml"));// pane you are GOING TO
@@ -204,38 +222,6 @@ public class AddRecipeMenuController implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();// pane you are ON
         window.setScene(scene);
         window.show();
-    }
-
-    /*
-        Function: searchRecipe
-        Purpose: to search through the arraylist of recipes
-        Parameters: ActionEven event (unused here)
-     */
-    @FXML
-    void searchRecipe(ActionEvent event) {
-
-        tblRecipe.getItems().clear();
-
-        if(txtfieldName.getText().isEmpty()) {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Please enter a recipe to search");
-            a.showAndWait();
-            return;
-        }
-        ObservableList<Recipe> recipes = Model.getObservableRecipes();
-        for( Recipe r : recipes) {
-            if( r.getTitle().toLowerCase().contains(txtfieldName.getText().toLowerCase()) ) {
-                tblRecipe.getItems().add(r);
-            }
-            //Need to fix logic. Have to search entire list before displaying message
-            /*else {
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setContentText("Could not find any matches");
-                a.showAndWait();
-                return;
-            }*/
-        }
-        txtfieldName.clear();
     }
 
     /*
@@ -256,6 +242,11 @@ public class AddRecipeMenuController implements Initializable {
     }
 
 
+    /*
+        Function: initialize
+        Purpose: to initialize cell factories and the items in the upper right corner of menu to print from.
+        Parameters: URL location, ResourceBundle resources (not used here)
+    */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colRecipe.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -283,6 +274,11 @@ public class AddRecipeMenuController implements Initializable {
     }
 
 
+    /*
+        Function: updateRecipeTable
+        Purpose: to refresh the recipe table after modification, adding, or deleting
+        Parameters: None
+     */
     private void updateRecipeTable(){
         ObservableList<Recipe> newList = FXCollections.observableList(Model.getRecipes());
         tblRecipe.getItems().clear();
