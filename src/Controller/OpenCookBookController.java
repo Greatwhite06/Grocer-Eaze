@@ -85,6 +85,10 @@ public class OpenCookBookController implements Initializable {
         colQuantity.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientAmount"));
         colUnit.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("measurement"));
 
+        colIngredient.impl_setReorderable(false);
+        colQuantity.impl_setReorderable(false);
+        colUnit.impl_setReorderable(false);
+
         ArrayList<Recipe> recipes = Model.getRecipes();
         ObservableList<Recipe> list = FXCollections.observableList(recipes);
         colRecipeTitle.setCellValueFactory(new PropertyValueFactory<Recipe, String>("title"));
