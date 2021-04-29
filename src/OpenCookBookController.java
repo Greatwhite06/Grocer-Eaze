@@ -51,6 +51,7 @@ public class OpenCookBookController implements Initializable {
     @FXML
     private TableColumn<Ingredient, String> colQuantity;
 
+
     @FXML
     private TableView<Ingredient> tblPrint;
 

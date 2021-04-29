@@ -6,6 +6,7 @@ Victor Danish: KUG872
 Cameron Brumblay: BWO509
 Wesley Jackson : ydh648
 */
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,11 +33,18 @@ public class AddRecipeMenuController implements Initializable {
     @FXML
     public TableColumn<Ingredient, String> colAmount;
     @FXML
+    public TableColumn<Ingredient, String> colMeasurement;
+    @FXML
     public TextField txtfieldIngredient;
     @FXML
     public TextField txtfieldQuantity;
     @FXML
     public TextField txtfieldName;
+    @FXML
+    public ChoiceBox measurementBox;
+
+    ObservableList<String> measurementList = FXCollections.observableArrayList(
+            "tsp", "Tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
 
     @FXML
     AnchorPane mainPane;
@@ -48,7 +56,7 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     void buttonAdd(ActionEvent event) {
-        Ingredient ingredient = new Ingredient(txtfieldIngredient.getText(), txtfieldQuantity.getText());
+        Ingredient ingredient = new Ingredient(txtfieldIngredient.getText(), txtfieldQuantity.getText(), measurementBox.getValue().toString());
         tableview.getItems().add(ingredient);
         txtfieldIngredient.clear();
         txtfieldQuantity.clear();
@@ -106,7 +114,8 @@ public class AddRecipeMenuController implements Initializable {
         for (int i = 0; i < tableview.getItems().size(); i++) {
             tempRecipe.addIngredient(
                     tableview.getItems().get(i).getIngredientName(),
-                    tableview.getItems().get(i).getIngredientAmount());
+                    tableview.getItems().get(i).getIngredientAmount(),
+                    tableview.getItems().get(i).getMeasurement());
         }
         tempList.add(tempRecipe);
 
@@ -141,7 +150,10 @@ public class AddRecipeMenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         colIngredient.setCellValueFactory(new PropertyValueFactory<>("IngredientName"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("IngredientAmount"));
+        colMeasurement.setCellValueFactory(new PropertyValueFactory<>("IngredientUnit"));
         //tableview.setItems(observableList);
+        measurementBox.setValue("tsp");
+        measurementBox.setItems(measurementList);
 
         tableview.setEditable(true);
         colIngredient.setCellFactory(TextFieldTableCell.forTableColumn());
