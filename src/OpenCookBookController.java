@@ -20,11 +20,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-//view inventory print go to printGroceryList
+
+
+
 
 
 
 public class OpenCookBookController implements Initializable {
+    @FXML
+    private Button clearbtn;
+
     @FXML
     private Button btnHome;
 
@@ -33,6 +38,21 @@ public class OpenCookBookController implements Initializable {
 
     @FXML
     AnchorPane mainPane;
+
+    @FXML
+    private TableView<Recipe> tblRecipes;
+
+    @FXML
+    private TableColumn<Recipe, String> colRecipeTitle;
+
+    @FXML
+    private TableColumn<Ingredient, String> colIngredient;
+
+    @FXML
+    private TableColumn<Ingredient, String> colQuantity;
+
+    @FXML
+    private TableView<Ingredient> tblPrint;
 
 
     @FXML
@@ -44,12 +64,33 @@ public class OpenCookBookController implements Initializable {
         window.show();
     }
 
+    @FXML
+    void update(ActionEvent event) {
+            ObservableList<Recipe> list = tblRecipes.getSelectionModel().getSelectedItems();
+            for (Recipe r : list){ 
+                tblPrint.getItems().addAll(r.getObservableIngredients());
+            }
+    }
+    @FXML
+    void clear(ActionEvent event) {
+        tblPrint.getItems().clear();
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            Model.readRecipeData();
-        } catch (IOException e) {
-            e.printStackTrace();
+        //Setup the Print table
+        colIngredient.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientName"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("IngredientAmount"));
+
+        ArrayList<Recipe> recipes = Model.getRecipes();
+        ObservableList<Recipe> list = FXCollections.observableList(recipes);
+        colRecipeTitle.setCellValueFactory(new PropertyValueFactory<Recipe, String>("title"));
+        tblRecipes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        for (Recipe i : list) {
+            tblRecipes.getItems().add(i);
         }
+        
     }
+
 }
