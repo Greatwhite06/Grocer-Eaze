@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OpenCookBookController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="750.0" pickOnBounds="true">
+         <image>
+            <Image url="@openCookBook/OpenCookBook.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0">
+         <children>
+            <ListView layoutX="392.0" layoutY="108.0" prefHeight="256.0" prefWidth="200.0" />
+            <ListView layoutX="115.0" layoutY="108.0" prefHeight="256.0" prefWidth="200.0" />
+            <Button fx:id="btnHome" contentDisplay="GRAPHIC_ONLY" layoutX="665.0" layoutY="421.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="65.0" prefWidth="71.0">
+               <effect>
+                  <Blend />
+               </effect>
+               <graphic>
+                  <ImageView fx:id="Home" fitHeight="65.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@PrintGroceryList/home.jpg" />
+                     </image>
+                     <effect>
+                        <Blend opacity="0.52" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

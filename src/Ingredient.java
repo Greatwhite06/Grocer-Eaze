@@ -4,8 +4,12 @@ Joseph Galvan: QRK815
 Trey Jones: LVS888
 Victor Danish: KUG872
 Cameron Brumblay: BWO509
+Wesley Jackson: ydh648
 */
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.CheckBox;
+
+import java.util.ArrayList;
 
 /*
  * Constructor Class
@@ -14,13 +18,16 @@ import javafx.beans.property.SimpleStringProperty;
 public class Ingredient {
     private String name;
     private String amount;
-
+    private CheckBox check;
+    private String measurement;
 
     /* Constructor for defining ingredients
      */
-    public Ingredient(String name, String amount) {
+    public Ingredient(String name, String amount /*,String measurement*/) {
         this.name = name;
         this.amount = amount;
+        //this.measurement = measurement; //ADD once the box is created in add menu
+        check = new CheckBox();
     }
     /* Empty constructor
      */
@@ -44,6 +51,17 @@ public class Ingredient {
         return amount;
     }
 
+    /*
+        Function: getCheckBox
+        Purpose: return ingredient Checkbox
+     */
+    public CheckBox getCheckBox(){
+        return this.check;
+    }
+
+    public String getMeasurement(){
+        return this.measurement;
+    }
     /*
         Function: getAmount
         Purpose: return the simpleStringProperty name
@@ -76,4 +94,5 @@ public class Ingredient {
     public void setIngredientAmount(String amount) {
         this.amount = amount;
     }
+
 }
