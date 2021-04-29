@@ -82,16 +82,26 @@ public class OpenCookBookController implements Initializable {
     }
 
     @FXML
-    void unitConversion(ActionEvent event){
+    void unitConversion(ActionEvent event) throws IOException {
+        ObservableList<Recipe> tableRecipes = tblRecipes.getSelectionModel().getSelectedItems();
         if(unitChange){
-            showIngredients(event);
+            Model.readRecipeData();
+            tblPrint.getItems().clear();
+            for(Recipe r: Model.getRecipes()){
+                for(Recipe t: tableRecipes){
+                    if (r.getTitle().equals(t.getTitle())) {
+                        tblPrint.getItems().addAll(r.getObservableIngredients());
+                    }
+                }
+            }
             unitChange = false;
-        }
-        else {
-            unitChange = true;
-            ObservableList<Ingredient> temp = tblPrint.getItems();
-            //tblPrint.getItems().clear();
-            for (Ingredient item : temp) {
+        }else {
+
+            ArrayList<Ingredient> switchIngredients = new ArrayList<>();
+            for (Recipe r : tableRecipes) {
+                switchIngredients.addAll(r.getIngredients());
+            }
+            for (Ingredient item : switchIngredients) {
                 double newAmount;
                 switch (item.getMeasurement()) {
                     case "tsp":
@@ -182,13 +192,10 @@ public class OpenCookBookController implements Initializable {
                 }
 
             }
-            for(Ingredient ing : temp){
-                System.out.println("Name: " + ing.getIngredientName() + " Amount: " + ing.getIngredientAmount() + " Unit: " + ing.getMeasurement());
-            }
-
+            unitChange = true;
+            tblPrint.getItems().clear();
+            tblPrint.getItems().addAll(switchIngredients);
         }
-
-
     }
 
     @Override
