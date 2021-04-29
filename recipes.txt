@@ -1,3 +1,4 @@
-Chicken Stew:Chicken-1-lb
-Custard:Ice Cream-1-cup:Vanilla-1-tsp:syrup-3-oz
 Chicken Pot Pie:Carrots-1-cup:Chicken-1-lb:Celery-5-oz
+Custard:Ice Cream-1-cup:Vanilla-1-tsp:syrup-3-oz
+Chicken Stew:Beef-2-lb
+Delete me Test:de-de-tsp
