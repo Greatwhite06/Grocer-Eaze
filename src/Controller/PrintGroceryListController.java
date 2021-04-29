@@ -1,4 +1,6 @@
-package Controller;/*
+package Controller;
+
+/*
 CS 3443-003: Heena Rathore
 Joseph Galvan: QRK815
 Trey Jones: LVS888
@@ -99,7 +101,7 @@ public class PrintGroceryListController implements Initializable {
         Function: initialize
         Purpose: to initialize cell factories and the items in the upper right corner of menu to print from.
         Parameters: URL location, ResourceBundle resources (not used here)
-     */
+    */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Setup the Print table
@@ -124,6 +126,11 @@ public class PrintGroceryListController implements Initializable {
         }
     }
 
+    /*
+        Function: addItem
+        Purpose: adds a unique item to a new list to combine items of the same measurement
+        Parameters: ActionEvent event (unused here)
+     */
     private ObservableList<Ingredient> addItem(ArrayList<Ingredient> ingredients, Ingredient ingredient){
         for(int i = 0; i < ingredients.size(); i++){
             if(ingredients.get(i).getIngredientName().equals(ingredient.getIngredientName())) {
