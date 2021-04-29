@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -22,11 +23,17 @@
                </font></Label>
             <TableView fx:id="tblPrint" layoutX="26.0" layoutY="244.0" onSort="#goToMainMenu" prefHeight="167.0" prefWidth="713.0">
               <columns>
-                <TableColumn fx:id="colIngredient" prefWidth="282.0" text="Ingredient" />
-                <TableColumn fx:id="colQuantity" prefWidth="144.0" text="Quantity" />
-                  <TableColumn fx:id="colUnit" prefWidth="139.0" text="Unit" />
-                  <TableColumn fx:id="colCheck" prefWidth="147.0" text="Checked" />
+                <TableColumn fx:id="colIngredient" prefWidth="282.0" sortable="false" text="Ingredient" />
+                <TableColumn fx:id="colQuantity" prefWidth="144.0" sortable="false" text="Quantity" />
+                  <TableColumn fx:id="colUnit" prefWidth="139.0" sortable="false" text="Unit" />
+                  <TableColumn fx:id="colCheck" editable="false" prefWidth="147.0" sortable="false" text="Added to Cart" />
               </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <SepiaTone />
+               </effect>
             </TableView>
             <Button fx:id="btnHome" layoutX="656.0" layoutY="429.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="65.0" prefWidth="71.0">
                <graphic>
@@ -46,6 +53,9 @@
               <columns>
                 <TableColumn fx:id="colRecipeTitle" prefWidth="199.0" text="Recipes" />
               </columns>
+               <effect>
+                  <SepiaTone />
+               </effect>
             </TableView>
             <Label layoutX="356.0" layoutY="20.0" prefHeight="48.0" prefWidth="175.0" text="(Highlight the recipes you want to print out)" textFill="WHITE" wrapText="true">
                <font>
