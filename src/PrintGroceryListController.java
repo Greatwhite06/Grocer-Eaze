@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -58,10 +59,17 @@ public class PrintGroceryListController implements Initializable {
     @FXML
     void update(ActionEvent event) {
         tblPrint.getItems().clear();
-        ObservableList<Recipe> list= tblRecipes.getSelectionModel().getSelectedItems();
+        ObservableList<Recipe> list;
+        list = tblRecipes.getSelectionModel().getSelectedItems();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ingredients.clear();
+
         for(Recipe r: list){
-            tblPrint.getItems().addAll(r.getObservableIngredients());
+            ingredients.addAll(r.getIngredients());
         }
+
+        ObservableList<Ingredient> observableIngredients = combineItems(ingredients);
+        tblPrint.getItems().addAll(observableIngredients);
     }
 
     /*
@@ -99,6 +107,28 @@ public class PrintGroceryListController implements Initializable {
         for(Recipe i: list){
             tblRecipes.getItems().add(i);
         }
+    }
+
+    private ObservableList<Ingredient> combineItems(ArrayList<Ingredient> origin){
+        /*
+        ArrayList<Ingredient> combined = new ArrayList<>();
+        int o;
+        for(o = 0; o < origin.size(); o++){
+            Ingredient tempOrigin = origin.get(o);
+            for(Ingredient i: combined){
+                Ingredient tempCombined = i;
+                if(tempOrigin.getIngredientName().equals(tempCombined.getIngredientName()) && tempOrigin.getMeasurement().equals(tempCombined.getMeasurement())){
+                    int originAmount = Integer.parseInt(tempOrigin.getIngredientAmount());
+                    int combinedAmount = Integer.parseInt(tempCombined.getIngredientAmount());
+                    combined.get(combined.indexOf(i)).setIngredientAmount(Integer.toString(originAmount + combinedAmount));
+                }else{
+                    combined.add(tempOrigin);
+                }
+            }
+        }
+        return FXCollections.observableList(combined);
+        */
+        return FXCollections.observableList(origin); //DELETE
     }
 
 }
