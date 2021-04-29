@@ -22,8 +22,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import Model.*;
 
 public class AddRecipeMenuController implements Initializable {
@@ -45,6 +45,10 @@ public class AddRecipeMenuController implements Initializable {
     @FXML
     public ChoiceBox measurementBox;
 
+    public TableView<Recipe> tblRecipe;
+
+    public TableColumn<Recipe, String> colRecipe;
+
     ObservableList<String> measurementList = FXCollections.observableArrayList(
             "measurement", "tsp", "tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
 
@@ -60,6 +64,7 @@ public class AddRecipeMenuController implements Initializable {
     void buttonAdd(ActionEvent event) {
         if(measurementBox.getValue().toString() == "measurement") {
             Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please select a unit of measurement");
             a.showAndWait();
             return;
         }
@@ -104,30 +109,71 @@ public class AddRecipeMenuController implements Initializable {
     /*
      * Add Model.Recipe Button
      * This will create and write a recipe to the .txt file
-     * The recipe will be appended to the end of the .txt file
      * A temporary ArrayList of Recipes is created so only 1 recipe is added vs accessing the static recipes ArrayList
      * A for loop runs through the size of the table and adds the ingredients to the tempRecipe
-     * Once populated the temp ArrayList is appended to the .txt file using the writeRecipeData function to ensure proper
+     * Once populated the temp ArrayList written to the .txt file using the writeRecipeData function to ensure proper
      * formatting for reading back later.
      */
     @FXML
     void addRecipe(ActionEvent event) throws IOException {
 
+        //import list of recipes
         ArrayList<Recipe> tempList = Model.getRecipes();
-
+        //set title to user input from recipe name textbox
         String title = txtfieldName.getText();
+        //creating a shell for the user input recipe
         Recipe tempRecipe = new Recipe(title);
 
-        for (int i = 0; i < tableview.getItems().size(); i++) {
-            tempRecipe.addIngredient(
-                    tableview.getItems().get(i).getIngredientName(),
-                    tableview.getItems().get(i).getIngredientAmount(),
-                    tableview.getItems().get(i).getMeasurement());
+        if(txtfieldName.getText().isEmpty()) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please enter a recipe name");
+            a.showAndWait();
+            return;
         }
-        tempList.add(tempRecipe);
 
-        Model.writeRecipeData(tempList);
+        //looping through recipes to check for existence
+        for(int i = 0; i < tempList.size(); i++ ) {
+            if(tempList.get(i).getTitle().equals(title)) {
+                System.out.println(title + " exists: " +tempList.get(i).getTitle().equals(title) );
 
+                Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+                a.setTitle("Add/Update Recipe Confirmation");
+                a.setHeaderText("This Recipe Already Exists!");
+                a.setContentText("Saving will overwrite recipe contents. Continue?");
+                Optional<ButtonType> result = a.showAndWait();
+
+                //ok button, when user clicks ok the old recipe in the arraylist is removed and a new one is created
+                //with all the data currently in the ingredient tableview
+                if(result.get() == ButtonType.OK) {
+                    System.out.println("you selected okay");
+                    tempList.remove(i);
+                    for (i = 0; i < tableview.getItems().size(); i++) {
+                        tempRecipe.addIngredient(
+                                tableview.getItems().get(i).getIngredientName(),
+                                tableview.getItems().get(i).getIngredientAmount(),
+                                tableview.getItems().get(i).getMeasurement());
+                    }
+                    tempList.add(tempRecipe);
+                    Model.writeRecipeData(tempList);
+                    break;
+                }
+                //cancel button, when user clicks the cancel button the addRecipe function is canceled.
+                else if (result.get() == ButtonType.CANCEL) {
+                    return;
+                }
+                //if recipe title does not exist in the arraylist a new recipe is added
+                else {
+                    for (i = 0; i < tableview.getItems().size(); i++) {
+                        tempRecipe.addIngredient(
+                                tableview.getItems().get(i).getIngredientName(),
+                                tableview.getItems().get(i).getIngredientAmount(),
+                                tableview.getItems().get(i).getMeasurement());
+                    }
+                    tempList.add(tempRecipe);
+                    Model.writeRecipeData(tempList);
+                }
+            }
+        }
         txtfieldName.clear();
         tableview.getItems().clear();
     }
@@ -141,20 +187,58 @@ public class AddRecipeMenuController implements Initializable {
         window.show();
     }
 
-    //currently not implemented/used
+    /*
+        Function: searchRecipe
+        Purpose: to search through the arraylist of recipes
+        Parameters: ActionEven event (unused here)
+     */
     @FXML
     void searchRecipe(ActionEvent event) {
 
+        tblRecipe.getItems().clear();
+
+        if(txtfieldName.getText().isEmpty()) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please enter a recipe to search");
+            a.showAndWait();
+            return;
+        }
+        ObservableList<Recipe> recipes = Model.getObservableRecipes();
+        for( Recipe r : recipes) {
+            if( r.getTitle().toLowerCase().contains(txtfieldName.getText().toLowerCase()) ) {
+                tblRecipe.getItems().add(r);
+            }
+            //Need to fix logic. Have to search entire list before displaying message
+            /*else {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Could not find any matches");
+                a.showAndWait();
+                return;
+            }*/
+        }
+        txtfieldName.clear();
     }
 
-    //currently not implemented/used
+    /*
+        Function: updateRecipe
+        Purpose: to populate the ingredient table with corresponding data from the recipe table
+                 this will allow users to then edit ingredients in the ingredient table before saving
+        Parameters: ActionEven event
+     */
     @FXML
-    void updateRecipe(ActionEvent event) {
-
+    void updateRecipe(ActionEvent event)  {
+        tableview.getItems().clear();
+        ObservableList<Recipe> list = tblRecipe.getSelectionModel().getSelectedItems();
+        for (Recipe r : list ) {
+            txtfieldName.clear();
+            txtfieldName.setText(r.getTitle());
+            tableview.getItems().addAll(r.getObservableIngredients());
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        colRecipe.setCellValueFactory(new PropertyValueFactory<>("title"));
         colIngredient.setCellValueFactory(new PropertyValueFactory<>("IngredientName"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("IngredientAmount"));
         colMeasurement.setCellValueFactory(new PropertyValueFactory<>("Measurement"));
@@ -166,8 +250,4 @@ public class AddRecipeMenuController implements Initializable {
         colIngredient.setCellFactory(TextFieldTableCell.forTableColumn());
         colAmount.setCellFactory(TextFieldTableCell.forTableColumn());
     }
-
-    /*ObservableList<Model.Ingredient> observableList = FXCollections.observableArrayList(
-            new Model.Ingredient("Chocolate", "2 Bars")
-    );*/
 }
