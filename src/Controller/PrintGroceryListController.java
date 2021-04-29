@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -70,7 +71,12 @@ public class PrintGroceryListController implements Initializable {
             ingredients.addAll(r.getIngredients());
         }
 
-        ObservableList<Ingredient> observableIngredients = combineItems(ingredients);
+
+        ArrayList<Ingredient> combinedIngredients = new ArrayList<Ingredient>();
+        ObservableList<Ingredient> observableIngredients = FXCollections.observableList(combinedIngredients);
+        for(Ingredient i: ingredients){
+            observableIngredients = addItem(combinedIngredients, i);
+        }
         tblPrint.getItems().addAll(observableIngredients);
     }
 
@@ -112,26 +118,19 @@ public class PrintGroceryListController implements Initializable {
         }
     }
 
-    private ObservableList<Ingredient> combineItems(ArrayList<Ingredient> origin){
-        /*
-        ArrayList<Model.Ingredient> combined = new ArrayList<>();
-        int o;
-        for(o = 0; o < origin.size(); o++){
-            Model.Ingredient tempOrigin = origin.get(o);
-            for(Model.Ingredient i: combined){
-                Model.Ingredient tempCombined = i;
-                if(tempOrigin.getIngredientName().equals(tempCombined.getIngredientName()) && tempOrigin.getMeasurement().equals(tempCombined.getMeasurement())){
-                    int originAmount = Integer.parseInt(tempOrigin.getIngredientAmount());
-                    int combinedAmount = Integer.parseInt(tempCombined.getIngredientAmount());
-                    combined.get(combined.indexOf(i)).setIngredientAmount(Integer.toString(originAmount + combinedAmount));
-                }else{
-                    combined.add(tempOrigin);
+    private ObservableList<Ingredient> addItem(ArrayList<Ingredient> ingredients, Ingredient ingredient){
+        for(int i = 0; i < ingredients.size(); i++){
+            if(ingredients.get(i).getIngredientName().equals(ingredient.getIngredientName())) {
+                if (ingredients.get(i).getMeasurement().equals(ingredient.getMeasurement())) {
+                    int original = Integer.parseInt(ingredients.get(i).getIngredientAmount());
+                    int newOne = Integer.parseInt(ingredient.getIngredientAmount());
+                    ingredients.get(i).setIngredientAmount(Integer.toString(original + newOne));
+                    return FXCollections.observableList(ingredients); //exit once found a combo
                 }
             }
         }
-        return FXCollections.observableList(combined);
-        */
-        return FXCollections.observableList(origin); //DELETE
+        ingredients.add(ingredient);
+        return FXCollections.observableList(ingredients);
     }
 
 }
