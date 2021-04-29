@@ -94,7 +94,7 @@ public class Ingredient {
     }
 
     public void setIngredientMeasurement(String measurement) {
-        this.measurement = this.measurement;
+        this.measurement = measurement;
     }
 
 }

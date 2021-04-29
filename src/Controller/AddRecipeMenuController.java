@@ -50,7 +50,7 @@ public class AddRecipeMenuController implements Initializable {
     public TableColumn<Recipe, String> colRecipe;
 
     ObservableList<String> measurementList = FXCollections.observableArrayList(
-            "measurement", "tsp", "tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
+            "tsp", "tbsp", "cup", "oz", "pt", "qt", "gal", "lb");
 
     @FXML
     AnchorPane mainPane;
@@ -62,7 +62,7 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     void buttonAdd(ActionEvent event) {
-        if(measurementBox.getValue().toString() == "measurement") {
+        if(measurementBox.getValue().toString().equals("")) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Please select a unit of measurement");
             a.showAndWait();
@@ -72,6 +72,16 @@ public class AddRecipeMenuController implements Initializable {
         tableview.getItems().add(ingredient);
         txtfieldIngredient.clear();
         txtfieldQuantity.clear();
+    }
+
+
+    @FXML
+    void deleteRecipe(ActionEvent event) throws IOException {
+        Recipe r = tblRecipe.getSelectionModel().getSelectedItem();
+        ArrayList<Recipe> recipes = Model.getRecipes();
+        recipes.remove(r);
+        Model.writeRecipeData(recipes); //update list in file
+        updateRecipeTable();
     }
 
     /*
@@ -95,6 +105,8 @@ public class AddRecipeMenuController implements Initializable {
     public void changeIngredient(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
         Ingredient ingredient = tableview.getSelectionModel().getSelectedItem();
         ingredient.setIngredientName(ingredientStringCellEditEvent.getNewValue());
+        tableview.getItems().remove(ingredient); //remove old
+        tableview.getItems().add(ingredient); //set new
     }
 
     /*
@@ -104,6 +116,23 @@ public class AddRecipeMenuController implements Initializable {
     public void changeAmount(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
         Ingredient ingredient = tableview.getSelectionModel().getSelectedItem();
         ingredient.setIngredientAmount(ingredientStringCellEditEvent.getNewValue());
+        tableview.getItems().remove(ingredient); //remove old
+        tableview.getItems().add(ingredient); //set new
+    }
+
+
+    @FXML
+    public void changeMeasurement(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
+        Ingredient ingredient = tableview.getSelectionModel().getSelectedItem();
+        if(measurementList.contains(ingredientStringCellEditEvent.getNewValue())){
+            ingredient.setIngredientMeasurement(ingredientStringCellEditEvent.getNewValue());
+            tableview.getItems().remove(ingredient); //remove old
+            tableview.getItems().add(ingredient); //set new
+            return;
+        }
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setContentText("Please type a valid of measurement");
+        a.showAndWait();
     }
 
     /*
@@ -134,48 +163,32 @@ public class AddRecipeMenuController implements Initializable {
         //looping through recipes to check for existence
         for(int i = 0; i < tempList.size(); i++ ) {
             if(tempList.get(i).getTitle().equals(title)) {
-                System.out.println(title + " exists: " +tempList.get(i).getTitle().equals(title) );
-
                 Alert a = new Alert(Alert.AlertType.CONFIRMATION);
                 a.setTitle("Add/Update Recipe Confirmation");
-                a.setHeaderText("This Recipe Already Exists!");
-                a.setContentText("Saving will overwrite recipe contents. Continue?");
+                a.setHeaderText("Recipe exists, would you like to update existing recipe?");
                 Optional<ButtonType> result = a.showAndWait();
 
                 //ok button, when user clicks ok the old recipe in the arraylist is removed and a new one is created
                 //with all the data currently in the ingredient tableview
-                if(result.get() == ButtonType.OK) {
-                    System.out.println("you selected okay");
-                    tempList.remove(i);
-                    for (i = 0; i < tableview.getItems().size(); i++) {
-                        tempRecipe.addIngredient(
-                                tableview.getItems().get(i).getIngredientName(),
-                                tableview.getItems().get(i).getIngredientAmount(),
-                                tableview.getItems().get(i).getMeasurement());
-                    }
-                    tempList.add(tempRecipe);
-                    Model.writeRecipeData(tempList);
-                    break;
-                }
-                //cancel button, when user clicks the cancel button the addRecipe function is canceled.
-                else if (result.get() == ButtonType.CANCEL) {
-                    return;
-                }
-                //if recipe title does not exist in the arraylist a new recipe is added
-                else {
-                    for (i = 0; i < tableview.getItems().size(); i++) {
-                        tempRecipe.addIngredient(
-                                tableview.getItems().get(i).getIngredientName(),
-                                tableview.getItems().get(i).getIngredientAmount(),
-                                tableview.getItems().get(i).getMeasurement());
-                    }
-                    tempList.add(tempRecipe);
-                    Model.writeRecipeData(tempList);
+                if (result.get() == ButtonType.OK) {
+                    tempList.remove(i); //user wishes to overwrite it, so remove the existing one
+                }else {
+                    return; //otherwise return and don't add
                 }
             }
         }
+        //Add recipe in the table.
+        for (int i = 0; i < tableview.getItems().size(); i++) {
+            tempRecipe.addIngredient(
+                    tableview.getItems().get(i).getIngredientName(),
+                    tableview.getItems().get(i).getIngredientAmount(),
+                    tableview.getItems().get(i).getMeasurement());
+        }
+        tempList.add(tempRecipe);
+        Model.writeRecipeData(tempList);
         txtfieldName.clear();
         tableview.getItems().clear();
+        updateRecipeTable();
     }
 
     @FXML
@@ -236,18 +249,33 @@ public class AddRecipeMenuController implements Initializable {
         }
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colRecipe.setCellValueFactory(new PropertyValueFactory<>("title"));
         colIngredient.setCellValueFactory(new PropertyValueFactory<>("IngredientName"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("IngredientAmount"));
         colMeasurement.setCellValueFactory(new PropertyValueFactory<>("Measurement"));
+
+        ObservableList<Recipe> list = FXCollections.observableList(Model.getRecipes());
+        for(Recipe r: list){
+            tblRecipe.getItems().add(r);
+        }
+
         //tableview.setItems(observableList);
-        measurementBox.setValue("measurement");
+        measurementBox.setValue("");
         measurementBox.setItems(measurementList);
 
         tableview.setEditable(true);
         colIngredient.setCellFactory(TextFieldTableCell.forTableColumn());
         colAmount.setCellFactory(TextFieldTableCell.forTableColumn());
+        colMeasurement.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+
+
+    private void updateRecipeTable(){
+        ObservableList<Recipe> newList = FXCollections.observableList(Model.getRecipes());
+        tblRecipe.getItems().clear();
+        tblRecipe.getItems().addAll(newList);
     }
 }
