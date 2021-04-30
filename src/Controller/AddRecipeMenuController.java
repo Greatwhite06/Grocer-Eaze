@@ -96,7 +96,6 @@ public class AddRecipeMenuController implements Initializable {
         //make sure value entered is a number
         try{
             Double.parseDouble(txtfieldQuantity.getText());
-            //Integer.parseInt(txtfieldQuantity.getText());
         } catch(NumberFormatException n){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Please enter a number for the quantity");
