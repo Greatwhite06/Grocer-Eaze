@@ -5,11 +5,11 @@ Team Name: Group 2 Kool Beans
 
 Group Members: 
 
-Cameron Brumblay: BWO509
-Victor Danish: KUG872
-Joseph Galvan: QRK815
-Wesley Jackson: YDH648
-Trey Jones: LVS888
+Cameron Brumblay: BWO509,
+Victor Danish: KUG872,
+Joseph Galvan: QRK815,
+Wesley Jackson: YDH648,
+Trey Jones: LVS888,
 
 
 Description:
