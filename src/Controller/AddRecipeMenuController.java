@@ -273,6 +273,7 @@ public class AddRecipeMenuController implements Initializable {
         Parameters: URL location, ResourceBundle resources (not used here)
     */
     @Override
+    @SuppressWarnings( "deprecation" )
     public void initialize(URL location, ResourceBundle resources) {
         colRecipe.setCellValueFactory(new PropertyValueFactory<>("title"));
         colIngredient.setCellValueFactory(new PropertyValueFactory<>("IngredientName"));

@@ -103,6 +103,7 @@ public class PrintGroceryListController implements Initializable {
         Parameters: URL location, ResourceBundle resources (not used here)
     */
     @Override
+    @SuppressWarnings( "deprecation" )
     public void initialize(URL location, ResourceBundle resources) {
         //Setup the Print table
         ArrayList<Recipe> recipes = Model.getRecipes();
