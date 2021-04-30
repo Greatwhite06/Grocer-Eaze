@@ -1,6 +1,4 @@
-Chicken Pot Pie:Carrots-1-cup:Chicken-1-lb:Celery-5-oz
-Chicken soup:Chicken-1-gal
-Chicken Stew:Beef-2-lb:Another Item-3-oz
-Chicken Biscuits:Chicken-1-lb
-Chicken Gravy:Chicken-1-lb
-Chicken:Chicken-.75-lb
+Beef Stew:Beef-1-lb:Carrots-1-cup:Broth-3-cup
+Chicken Pot Pie:Carrots-3-cup:Chicken-1-lb:Peas-.5-cup
+Chicken Soup:Chicken-1-lb:Broth-1-cup:Noodles-1-lb
+Chicken Fried Chicken:Chicken-1-cup:Breading-2-cup
