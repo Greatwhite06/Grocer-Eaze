@@ -169,6 +169,15 @@ public class AddRecipeMenuController implements Initializable {
      */
     @FXML
     public void changeAmount(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
+        //make sure value entered is a number
+        try{
+            Integer.parseInt(ingredientStringCellEditEvent.getNewValue());
+        } catch(NumberFormatException n){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please enter a number for the quantity");
+            a.showAndWait();
+            return;
+        }
         if(ingredientStringCellEditEvent.getNewValue().equals(""))
             return;
         Ingredient ingredient = tableview.getSelectionModel().getSelectedItem();
