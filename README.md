@@ -15,8 +15,8 @@ Trey Jones: LVS888,
 Description:
 Grocer-Eaze will digitally store your recipes, and allow you to select from them to compile, and print an organized grocery list. 
 
-Known Bugs: None that we have noticed.
+Known Bugs: None that we have noticed. There is however a warning that pops up for OpenCookBook as a newer version of Java was created. There is no run issue.
 
 Login info: Very user-friendly, if the user has the app, the user can use the app! There are no specific conditions to login and use our application.
 
-Versions or other requiremets: No specific requirments or special versions of Java or SceneBuilder were used. In order to run this project, please build, and then run!
+Versions or other requiremets: No specific requirments or special versions of Java or SceneBuilder are need to run. However at least one fxml was created in Java 15. In order to run this project, please build, and then run!
