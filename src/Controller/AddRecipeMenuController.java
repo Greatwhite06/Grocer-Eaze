@@ -95,7 +95,8 @@ public class AddRecipeMenuController implements Initializable {
 
         //make sure value entered is a number
         try{
-            Integer.parseInt(txtfieldQuantity.getText());
+            Double.parseDouble(txtfieldQuantity.getText());
+            //Integer.parseInt(txtfieldQuantity.getText());
         } catch(NumberFormatException n){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Please enter a number for the quantity");
@@ -171,7 +172,7 @@ public class AddRecipeMenuController implements Initializable {
     public void changeAmount(TableColumn.CellEditEvent<Ingredient, String> ingredientStringCellEditEvent) {
         //make sure value entered is a number
         try{
-            Integer.parseInt(ingredientStringCellEditEvent.getNewValue());
+            Double.parseDouble((ingredientStringCellEditEvent.getNewValue()));
         } catch(NumberFormatException n){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Please enter a number for the quantity");
