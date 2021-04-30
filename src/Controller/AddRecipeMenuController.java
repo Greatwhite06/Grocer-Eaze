@@ -70,6 +70,7 @@ public class AddRecipeMenuController implements Initializable {
             a.showAndWait();
             return;
         }
+        //Checks for text fields being empty
         if(txtfieldIngredient.getText().isEmpty()){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Please enter an ingredient");
@@ -82,12 +83,26 @@ public class AddRecipeMenuController implements Initializable {
             a.showAndWait();
             return;
         }
+
+
+
         if(measurementBox.getValue().toString().equals("")) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Please select a unit of measurement");
             a.showAndWait();
             return;
         }
+
+        //make sure value entered is a number
+        try{
+            Integer.parseInt(txtfieldQuantity.getText());
+        } catch(NumberFormatException n){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please enter a number for the quantity");
+            a.showAndWait();
+            return;
+        }
+
         Ingredient ingredient = new Ingredient(txtfieldIngredient.getText(), txtfieldQuantity.getText(), measurementBox.getValue().toString());
         tableview.getItems().add(ingredient);
         txtfieldIngredient.clear();
