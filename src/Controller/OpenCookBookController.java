@@ -57,6 +57,11 @@ public class OpenCookBookController implements Initializable {
 
     boolean unitChange = false;
 
+    /*
+        Function:  goToHomeMenu
+        Purpose: to return to homescreen
+        Parameters: ActionEvent event
+     */
     @FXML
     public void goToMainMenu(ActionEvent event) throws IOException {
         mainPane = FXMLLoader.load(getClass().getResource("../View/MainMenu.fxml"));// pane you are GOING TO
@@ -66,6 +71,11 @@ public class OpenCookBookController implements Initializable {
         window.show();
     }
 
+    /*
+        Function: showIngredients
+        Purpose: show ingredients for recipes selected
+        Parameters: ActionEven event (unused)
+     */
     @FXML
     void showIngredients(ActionEvent event) {
         tblPrint.getItems().clear();
@@ -76,15 +86,10 @@ public class OpenCookBookController implements Initializable {
 
     }
 
-    @FXML
-    void clear(ActionEvent event) {
-        tblPrint.getItems().clear();
-    }
-
     /*
         Function: unitConversion
-        Purpose: To return to main menu screen
-        Parameters: ActionEven event (to get the caller window)
+        Purpose: convert customary units to metric and back
+        Parameters: ActionEven event (unused)
      */
     @FXML
     void unitConversion(ActionEvent event) throws IOException {
