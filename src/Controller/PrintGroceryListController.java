@@ -136,9 +136,9 @@ public class PrintGroceryListController implements Initializable {
         for(int i = 0; i < ingredients.size(); i++){
             if(ingredients.get(i).getIngredientName().equals(ingredient.getIngredientName())) {
                 if (ingredients.get(i).getMeasurement().equals(ingredient.getMeasurement())) {
-                    int original = Integer.parseInt(ingredients.get(i).getIngredientAmount());
-                    int newOne = Integer.parseInt(ingredient.getIngredientAmount());
-                    ingredients.get(i).setIngredientAmount(Integer.toString(original + newOne));
+                    double original = Double.parseDouble(ingredients.get(i).getIngredientAmount());
+                    double newOne = Double.parseDouble(ingredient.getIngredientAmount());
+                    ingredients.get(i).setIngredientAmount(Double.toString(original + newOne));
                     return FXCollections.observableList(ingredients); //exit once found a combo
                 }
             }
