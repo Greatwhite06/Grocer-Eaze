@@ -208,6 +208,11 @@ public class OpenCookBookController implements Initializable {
         }
     }
 
+    /*
+        Function: initialize
+        Purpose: to initialize cell factories and the items the recipe selector to show ingredients
+        Parameters: URL location, ResourceBundle resources
+    */
     @Override
     @SuppressWarnings( "deprecation" )
     public void initialize(URL location, ResourceBundle resources) {
